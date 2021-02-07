@@ -25,14 +25,14 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Inventario',
                 type     : 'item',
                 icon     : 'ballot',
-                url      : '/products',
+                url      : '/inventory',
             },
             {
                 id       : 'orders',
                 title    : 'Órdenes',
                 type     : 'item',
                 icon     : 'assignment',
-                url      : '/operating',
+                url      : '/orders',
             },
         ]
     },

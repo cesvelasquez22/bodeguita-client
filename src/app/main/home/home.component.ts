@@ -6,8 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  dateNow = Date.now();
 
-  constructor() { }
+  constructor() {
+    setInterval(() => {
+        this.dateNow = Date.now();
+    }, 1000);
+  }
 
   ngOnInit(): void {
   }
