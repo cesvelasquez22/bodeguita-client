@@ -4,6 +4,11 @@
 // Import app.theme.scss
 @import "app/app.theme";
 
-#wrapper-background {
-    // background-color: white;
+// #wrapper-background {
+//     background-color: white;
+// }
+
+.create-button {
+    position: absolute;
+    padding-right: 2%;
 }

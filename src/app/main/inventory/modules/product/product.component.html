@@ -1,0 +1,27 @@
+<app-loading-overlay [isActive]="loading"></app-loading-overlay>
+<div
+    class="page-layout simple fullwidth"
+    fxLayout="column"
+>
+    <app-title-header
+        [icon]="'assistant'"
+        [section]="'Productos'"
+        [title]="'Listado'"
+    ></app-title-header>
+    <div fxLayout="column" class="mx-12 mt-32">
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <div
+                fxLayout="row"
+                fxLayoutAlign="end center"
+                class="mt-12 create-button"
+            >
+                <button mat-fab class="accent" routerLink="create">
+                    <mat-icon>playlist_add</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div fxLayout="column" class="mx-12">
+            <app-product-list></app-product-list>
+        </div>
+    </div>
+</div>

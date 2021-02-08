@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductCreateComponent } from './components/product-create/product-create.component';
-import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductCreateComponent } from './components/create/product-create.component';
+import { ProductComponent } from './product.component';
 
 const routes: Routes = [
     {
         path: '', // localhost/inventory/products/
-        component: ProductListComponent,
+        component: ProductComponent,
     },
     {
         path: 'create', // localhost/inventory/products/create
