@@ -17,6 +17,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseSidebarModule, FuseWidgetModule } from '@fuse/components';
 import { CommonModule } from '@angular/common';
+import { WidgetComponent } from './components/widget/widget.component';
+import { BestSalesComponent } from './components/best-sales/best-sales.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 export const routes: Routes = [
     {
@@ -26,7 +29,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, WidgetComponent, BestSalesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -39,7 +42,7 @@ export const routes: Routes = [
     MatMenuModule,
     MatSelectModule,
     MatTableModule,
-    MatTabsModule,
+    MatPaginatorModule,
 
     // Fuse
     FuseSharedModule,
