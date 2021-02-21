@@ -1,21 +1,29 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {AuthRoutingModule} from './main/auth/auth-routing.module';
+import { AuthGuard } from './core/guards/auth/auth.guard';
+import { FullLayoutContainer } from './layout/containers/full-layout/full-layout-container';
 
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'auth',
         pathMatch: 'full',
     },
     {
+        path: 'auth',
+        loadChildren: () =>
+            import('./auth/auth.module').then((m) => m.AuthModule),
+    },
+    {
         path: 'home',
+        canActivate: [AuthGuard],
         loadChildren: () =>
             import('./main/home/home.module').then((m) => m.HomeModule),
 
     },
     {
         path: 'inventory',
+        canActivate: [AuthGuard],
         loadChildren: () =>
             import('./main/inventory/inventory.module').then((m) => m.InventoryModule),
     },
@@ -24,7 +32,6 @@ const routes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forRoot(routes),
-        AuthRoutingModule
     ],
     exports: [RouterModule],
 })
