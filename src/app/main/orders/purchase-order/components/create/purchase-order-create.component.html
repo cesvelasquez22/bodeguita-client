@@ -1,0 +1,22 @@
+<app-loading-overlay [isActive]="loading"></app-loading-overlay>
+<div class="page-layout simple fullwidth" fxLayout="column">
+    <app-title-header
+        [icon]="'assistant'"
+        [section]="'Órdenes de compra'"
+        [title]="'Crear orden'"
+    ></app-title-header>
+
+    <div fxLayout="column" class="mx-12 mt-32">
+        <div fxLayout="column" class="mx-12">
+            <mat-card>
+                <form [formGroup]="purchaseOrderForm">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Outline form field</mat-label>
+                        <input matInput placeholder="Placeholder" />
+                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    </mat-form-field>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

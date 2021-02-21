@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guards/auth/auth.guard';
-import { FullLayoutContainer } from './layout/containers/full-layout/full-layout-container';
 
 const routes: Routes = [
     {
@@ -26,6 +25,12 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: () =>
             import('./main/inventory/inventory.module').then((m) => m.InventoryModule),
+    },
+    {
+        path: 'orders',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+            import('./main/orders/order.module').then((m) => m.OrderModule),
     },
 ];
 

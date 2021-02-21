@@ -1,0 +1,130 @@
+<app-loading-overlay [isActive]="loading"></app-loading-overlay>
+<div class="page-layout simple fullwidth" fxLayout="column">
+    <app-title-header
+        [icon]="'assistant'"
+        [section]="'Productos'"
+        [title]="'Nuevo producto'"
+    ></app-title-header>
+
+    <div fxLayout="row" fxLayout.xs="column">
+        <div fxLayout="column" fxFlex="40" class="m-36">
+            <mat-card>
+                <mat-card-title> Datos del producto </mat-card-title>
+
+                <form
+                    [formGroup]="productForm"
+                    #form="ngForm"
+                    (ngSubmit)="onSubmit(form)"
+                >
+                    <ng-container *ngIf="productInfo$ | async as productInfo">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Marca</mat-label>
+                            <mat-select formControlName="IDMarca">
+                                <mat-option
+                                    *ngFor="let marca of productInfo[0]"
+                                    [value]="marca.IdMarca"
+                                    >{{ marca.Nombre }}</mat-option
+                                >
+                            </mat-select>
+
+                            <mat-error
+                                *ngIf="
+                                    productForm
+                                        .get('IDMarca')
+                                        .hasError('required')
+                                "
+                            >
+                                La marca es requerida
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Categoría</mat-label>
+                            <mat-select formControlName="IDCategoria">
+                                <mat-option
+                                    *ngFor="let categoria of productInfo[1]"
+                                    [value]="categoria.IdCateogira"
+                                    >{{ categoria.Nombre }}</mat-option
+                                >
+                            </mat-select>
+
+                            <mat-error
+                                *ngIf="
+                                    productForm
+                                        .get('IDCategoria')
+                                        .hasError('required')
+                                "
+                            >
+                                La categoría es requerida
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Dimensión</mat-label>
+                            <mat-select formControlName="IDDimension">
+                                <mat-option
+                                    *ngFor="let dimension of productInfo[2]"
+                                    [value]="dimension.IdDimension"
+                                    >{{ dimension.Nombre }}</mat-option
+                                >
+                            </mat-select>
+
+                            <mat-error
+                                *ngIf="
+                                    productForm
+                                        .get('IDDimension')
+                                        .hasError('required')
+                                "
+                            >
+                                La dimension es requerida
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Precio unitario</mat-label>
+                            <input
+                                matInput
+                                type="text"
+                                formControlName="PrecioUnitario"
+                                pattern="^\d+(\.\d{1,2})?$"
+                                digitOnly
+                                decimal="true"
+                            />
+                            <mat-icon matSuffix>attach_money</mat-icon>
+                            <mat-error
+                                *ngIf="
+                                    productForm
+                                        .get('PrecioUnitario')
+                                        .hasError('required')
+                                "
+                            >
+                                El precio unitario es requerido.
+                            </mat-error>
+                        </mat-form-field>
+                        
+                        <mat-card-actions
+                            fxLayout="row"
+                            fxLayoutAlign="end center"
+                        >
+                            <button
+                                mat-stroked-button
+                                color="primary"
+                                routerLink=".."
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                mat-raised-button
+                                color="primary"
+                                [disabled]="productForm.invalid"
+                                type="submit"
+                            >
+                                Guardar
+                            </button>
+                        </mat-card-actions>
+                    </ng-container>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

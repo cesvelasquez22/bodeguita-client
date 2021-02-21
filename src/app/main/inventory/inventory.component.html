@@ -8,10 +8,10 @@
         [title]="'Inventario'"
     ></app-title-header>
 
-    <div fxLayout="row" fxLayout.xs="column" fxFlex="50">
+    <div fxLayout="row" fxLayout.xs="column" fxFlex="100">
         <div fxLayout="row" fxFlex="100" class="m-36">
-            <div fxLayout="column" fxFlex="33" class="mx-12">
-                <mat-card>
+            <div fxLayout="column" fxFlex="25" class="mx-12">
+                <mat-card class="mat-elevation-z8">
                     <mat-card-header>
                         <div mat-card-avatar class="avatar-icon">
                             <mat-icon>list_alt</mat-icon>
@@ -21,29 +21,18 @@
                     </mat-card-header>
                     <img
                         mat-card-image
-                        src="../../../assets/images/inventory/1-Inventario Productos.jpeg"
+                        src="assets/images/inventory/products-stats.svg"
                         alt="Photo of a Shiba Inu"
                     />
-                    <mat-card-content>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipiscing
-                            elit, primis malesuada libero etiam senectus felis
-                            eget, aliquam cubilia integer augue ligula vitae.
-                            Phasellus potenti parturient aliquet non ad, nec
-                            arcu facilisis pellentesque, placerat turpis velit
-                            per.
-                        </p>
-                    </mat-card-content>
                     <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
                         <button mat-raised-button color="primary" routerLink="products">
                             Listado
                         </button>
-                        <!-- <button mat-button>SHARE</button> -->
                     </mat-card-actions>
                 </mat-card>
             </div>
-            <div fxLayout="column" fxFlex="33" class="mx-12">
-                <mat-card>
+            <div fxLayout="column" fxFlex="25" class="mx-12">
+                <mat-card class="mat-elevation-z8">
                     <mat-card-header>
                         <div mat-card-avatar class="avatar-icon">
                             <mat-icon>list_alt</mat-icon>
@@ -53,59 +42,16 @@
                     </mat-card-header>
                     <img
                         mat-card-image
-                        src="../../../assets/images/inventory/data-processing.svg"
+                        src="assets/images/inventory/data-processing.svg"
                         alt="Photo of a Shiba Inu"
                     />
-                    <mat-card-content>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipiscing
-                            elit, primis malesuada libero etiam senectus felis
-                            eget, aliquam cubilia integer augue ligula vitae.
-                            Phasellus potenti parturient aliquet non ad, nec
-                            arcu facilisis pellentesque, placerat turpis velit
-                            per.
-                        </p>
-                    </mat-card-content>
                     <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
                         <button mat-raised-button color="primary" routerLink="warehousing">
                             Listado
                         </button>
-                        <!-- <button mat-button>SHARE</button> -->
                     </mat-card-actions>
                 </mat-card>
             </div>
-            <!-- <div fxLayout="column" fxFlex="33" class="mx-12">
-                <mat-card>
-                    <mat-card-header>
-                        <div mat-card-avatar class="avatar-icon">
-                            <mat-icon>list_alt</mat-icon>
-                        </div>
-                        <mat-card-title>Ventas</mat-card-title>
-                        <mat-card-subtitle>Órdenes</mat-card-subtitle>
-                    </mat-card-header>
-                    <img
-                        mat-card-image
-                        src="../../../assets/images/inventory/data-processing.svg"
-                        alt="Photo of a Shiba Inu"
-                    />
-                    <mat-card-content>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipiscing
-                            elit, primis malesuada libero etiam senectus felis
-                            eget, aliquam cubilia integer augue ligula vitae.
-                            Phasellus potenti parturient aliquet non ad, nec
-                            arcu facilisis pellentesque, placerat turpis velit
-                            per.
-                        </p>
-                    </mat-card-content>
-                    <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
-                        <button mat-raised-button color="primary">
-                            Listado
-                        </button>
-                        <button mat-button>SHARE</button>
-                    </mat-card-actions>
-                </mat-card>
-            </div> -->
         </div>
     </div>
 </div>

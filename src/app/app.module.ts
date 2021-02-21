@@ -27,13 +27,11 @@ import { SharedModule } from './shared/shared.module';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
-
 @NgModule({
     declarations: [
         AppComponent,
         SimpleLayoutContainer,
-        FullLayoutContainer,
-        
+        FullLayoutContainer,        
     ],
     imports     : [
         AppRoutingModule,

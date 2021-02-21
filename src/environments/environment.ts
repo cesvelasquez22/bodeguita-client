@@ -10,7 +10,10 @@ export const environment = {
     //
     // ─── URL CONTROLLERS PREFIX ─────────────────────────────────────────────────────
     //
-    productoPrefix: 'producto'
+    productoPrefix: 'producto',
+    marcaPrefix: 'marca',
+    categoriaPrefix: 'categoria',
+    dimensionPrefix: 'dimension',
 };
 
 /*
