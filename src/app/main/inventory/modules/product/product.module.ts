@@ -17,6 +17,9 @@ import { ProductComponent } from './product.component';
 import { ProductListService } from './services/product-list/product-list.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -32,6 +35,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatPaginatorModule,
     MatIconModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
   ],
   providers: [
     ProductService,

@@ -1,1 +1,67 @@
-<p>product-create works!</p>
+<app-loading-overlay [isActive]="loading"></app-loading-overlay>
+
+<div class="page-layout simple fullwidth" fxLayout="column">
+    <app-title-header [icon]="'assistant'" [section]="'Productos'" [title]="'Crear'">
+    </app-title-header>
+
+    <div fxLayout="column" class="mx-12 mt-32">
+
+        <div fxLayout="column" class="mx-12">
+            <mat-card>
+
+                <div fxLayout="column">
+
+                    <div fxLayout="row">
+
+                        <div fxLayout="column" fxLayoutAlign="center" fxFlex="80">
+                            <form>
+                                <h2><strong>Informacion General del producto</strong></h2>
+
+                                <div class="ml-24 mr-24" fxLayout="row" fxLayoutAlign="space-between">
+
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                                        <mat-label>Nombre producto</mat-label>
+                                        <input matInput name="name" />
+                                    </mat-form-field>
+                            
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                                        <mat-label>Marca</mat-label>
+                                        <input matInput name="brand" />
+                                    </mat-form-field>
+                            
+                                </div>
+                            
+                                <div class="ml-24 mr-24" fxLayout="row" fxLayoutAlign="space-between">
+                            
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                                        <mat-label>Precio</mat-label>
+                                        <input matInput name="price" />
+                                    </mat-form-field>
+                            
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="49">
+                                        <mat-label>Categoria</mat-label>
+                                        <input matInput name="category" />
+                                    </mat-form-field>
+                            
+                            
+                                </div>
+
+                                <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+                                    <button mat-stroked-button color="primary" [routerLink]="['/inventory/products']">
+                                        Cancelar
+                                    </button>
+                                    <button mat-raised-button color="primary" type="submit">
+                                        Guardar
+                                    </button>
+                                </mat-card-actions>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-card>
+        </div>
+    </div>
+
+
+</div>
