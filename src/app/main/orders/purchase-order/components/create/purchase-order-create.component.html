@@ -3,18 +3,263 @@
     <app-title-header
         [icon]="'assistant'"
         [section]="'Órdenes de compra'"
-        [title]="'Crear orden'"
+        [title]="'Nueva orden de compra'"
     ></app-title-header>
 
-    <div fxLayout="column" class="mx-12 mt-32">
-        <div fxLayout="column" class="mx-12">
+    <!--
+      -- ─── PURCHASE ORDER BODY ────────────────────────────────────────────────────────
+      -->
+    <div fxLayout="row" fxLayout.xs="column">
+        <div fxLayout="column" fxFlex="100" class="m-36">
             <mat-card>
                 <form [formGroup]="purchaseOrderForm">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Outline form field</mat-label>
-                        <input matInput placeholder="Placeholder" />
-                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                    </mat-form-field>
+                    <!--
+                      -- PURCHASE ORDER HEADER
+                      -->
+                    <div fxLayout="row">
+                        <div
+                            fxLayout="column"
+                            fxLayoutAlign="center start"
+                            fxFlex="50"
+                        >
+                            <button mat-mini-fab routerLink="..">
+                                <mat-icon>arrow_back</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <div
+                            fxLayout="column"
+                            fxLayoutAlign="center start"
+                            fxFlex="50"
+                        >
+                            <img src="assets/images/logos/fuse.svg" alt="" />
+                        </div>
+                        <div
+                            fxLayout="column"
+                            fxLayoutAlign="end end"
+                            fxFlex="50"
+                        >
+                            <div class="select-provider">
+                                <div fxLayout="row">
+                                    <div
+                                        fxLayout="column"
+                                        fxLayoutAlign="center start"
+                                        fxFlex="50"
+                                    >
+                                        <span class="mat-subheading-2"
+                                            ><strong
+                                                >Informacion del
+                                                proveedor</strong
+                                            ></span
+                                        >
+                                    </div>
+                                    <!-- <div
+                                        fxLayout="column"
+                                        fxLayoutAlign="center end"
+                                        fxFlex="50"
+                                        *ngIf="viewModePurchaseOrder === 2"
+                                    >
+                                        <button
+                                            mat-mini-fab
+                                            (click)="addInvoiceCustomerDialog()"
+                                        >
+                                            <mat-icon>person_add</mat-icon>
+                                        </button>
+                                    </div> -->
+                                </div>
+                                <div
+                                    fxLayout="row"
+                                    *ngIf="
+                                        purchaseOrderInfo$
+                                            | async as purchaseOrderInfo
+                                    "
+                                >
+                                    <mat-form-field
+                                        appearance=""
+                                        *ngIf="viewModePurchaseOrder === 2"
+                                    >
+                                        <mat-label>Proveedor</mat-label>
+                                        <mat-select
+                                            formControlName="Idproveedor"
+                                            #providerSelect
+                                            (selectionChange)="
+                                                purchaseOrderSetData()
+                                            "
+                                        >
+                                            <!-- <mat-option #customerOption>
+                                                <ngx-mat-select-search
+                                                    [formControl]="filterSelect"
+                                                    placeholderLabel="Busqueda"
+                                                    noEntriesFoundLabel="No hay registros disponibles"
+                                                ></ngx-mat-select-search>
+                                            </mat-option> -->
+                                            <mat-option
+                                                *ngFor="
+                                                    let provider of purchaseOrderInfo[0]
+                                                "
+                                                [value]="provider.IdProveedor"
+                                            >
+                                                {{ provider.Nombre }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error
+                                            *ngIf="
+                                                purchaseOrderForm
+                                                    .get('Idproveedor')
+                                                    .hasError('required')
+                                            "
+                                        >
+                                            Los datos del proveedor son
+                                            requeridos
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="row">
+                        <div
+                            fxLayout="column"
+                            fxLayoutAlign="start start"
+                            fxFlex="50"
+                        >
+                            <div><strong>RTN: </strong>05011955522252</div>
+                            <div>
+                                <strong>Direccion: </strong>San Pedro Sula,
+                                Honduras
+                            </div>
+                            <div>
+                                <strong>Email: </strong
+                                >bodeguitabendicion@gmail.com
+                            </div>
+                            <div><strong>Telefono: </strong>98989898</div>
+                        </div>
+                        <div
+                            fxLayout="column"
+                            fxLayoutAlign="start start"
+                            fxFlex="50"
+                        >
+                            <!--
+                          -- CREATE
+                          -->
+                            <div
+                                *ngIf="
+                                    purchaseOrderProvider &&
+                                    viewModePurchaseOrder === 2
+                                "
+                            >
+                                <strong>Dirección: </strong
+                                >{{ purchaseOrderProvider.Direccion }}
+                                <strong>Telefono: </strong
+                                >{{ purchaseOrderProvider.Telefono }}
+                            </div>
+                            <!--
+                          -- EDIT
+                          -->
+                            <!-- <div
+                                *ngIf="
+                                    invoiceDetail &&
+                                    invoiceDetail.customer &&
+                                    viewModePurchaseOrder === 1
+                                "
+                            >
+                                <strong>Dirección: </strong
+                                >{{
+                                    purchaseOrderProvider.Direccion
+                                }}
+                                <strong>Telefono: </strong
+                                >{{
+                                    purchaseOrderProvider.Telefono
+                                }}
+                            </div> -->
+                        </div>
+                    </div>
+                    <!--
+                      -- PURCHASE ORDER FEATURES
+                      -->
+                    <div fxLayout="row" fxLayout.xs="column">
+                        <div
+                            fxLayout="row"
+                            fxFlex="33"
+                            class="purchase-order-features"
+                        >
+                            <div style="width: 100%">
+                                <!--
+                                  -- CREATE
+                                  -->
+                                <div *ngIf="viewModePurchaseOrder === 2">
+                                    <span class="mat-subheading-2"
+                                        ><strong>Forma de pago</strong></span
+                                    >
+                                    <div fxLayout="row">
+                                        <mat-form-field appearance="">
+                                            <mat-label>Pago</mat-label>
+                                            <mat-select formControlName="Tipo">
+                                                <mat-option
+                                                    *ngFor="
+                                                        let payment of paymentMethod
+                                                            | keyvalue
+                                                    "
+                                                    [value]="payment.value"
+                                                >
+                                                    {{ payment.value }}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error
+                                                *ngIf="
+                                                    purchaseOrderForm
+                                                        .get('Tipo')
+                                                        .hasError('required')
+                                                "
+                                            >
+                                                La forma de pago es requerida
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            fxLayout="row"
+                            fxFlex="33"
+                            class="purchase-order-features"
+                        >
+                            <div style="width: 100%">
+                                <!--
+                              -- CREATE
+                              -->
+                                <div *ngIf="viewModePurchaseOrder === 2">
+                                    <span class="mat-subheading-2"
+                                        ><strong>Fecha expectativa de entrega</strong></span
+                                    >
+                                    <div fxLayout="row"></div>
+                                </div>
+                            </div>
+                            <mat-form-field>
+                                <input
+                                    matInput
+                                    [matDatepicker]="expectDate"
+                                    readonly
+                                    formControlName="FechaEspectativa"
+                                />
+                                <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="expectDate"
+                                ></mat-datepicker-toggle>
+                                <mat-datepicker #expectDate></mat-datepicker>
+                                <mat-error
+                                    *ngIf="
+                                        purchaseOrderForm
+                                            .get('FechaEspectativa')
+                                            .hasError('required')
+                                    "
+                                >
+                                    La fecha expectativa es requerida
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
                 </form>
             </mat-card>
         </div>

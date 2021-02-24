@@ -3,6 +3,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { IPurchaseOrder } from '../../models/purchase-order.model';
 import { Subject } from 'rxjs';
+import { PurchaseOrderService } from '../../services/purchase-order/purchase-order.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-purchase-order-list',
@@ -18,11 +20,12 @@ export class PurchaseOrderListComponent implements OnInit {
     // ─── RELATED TO TABLE ───────────────────────────────────────────────────────────
     //
     displayedColumns: string[] = [
-        '#',
-        'FechaEspectativa',
-        'IDProveedor',
-        'Tipo',
-        'IDEstadoOrdenCompra',
+        'idOrdenCompra',
+        'fechaCreacion',
+        'fechaEspectativa',
+        'idProveedor',
+        'tipo',
+        'estado',
     ];
     dataSource = new MatTableDataSource<IPurchaseOrder>([]);
     @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -32,9 +35,23 @@ export class PurchaseOrderListComponent implements OnInit {
     //
     private unsubscribe$: Subject<any> = new Subject();
 
-  constructor() { }
+  constructor(
+      private purchaseOrderService: PurchaseOrderService,
+  ) { }
 
   ngOnInit(): void {
+      this.getPurchaseOrders();
+  }
+
+  getPurchaseOrders() {
+    this.purchaseOrderService.getPurchaseOrders().pipe(takeUntil(this.unsubscribe$)).subscribe(purchaseOrders => {
+        if (purchaseOrders && purchaseOrders.length > 0) {
+            this.dataSource = new MatTableDataSource<IPurchaseOrder>(
+                purchaseOrders
+            );
+            this.dataSource.paginator = this.paginator;
+        }
+    });
   }
 
 }
