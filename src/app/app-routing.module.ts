@@ -15,20 +15,20 @@ const routes: Routes = [
     },
     {
         path: 'home',
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         loadChildren: () =>
             import('./main/home/home.module').then((m) => m.HomeModule),
 
     },
     {
         path: 'inventory',
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         loadChildren: () =>
             import('./main/inventory/inventory.module').then((m) => m.InventoryModule),
     },
     {
         path: 'orders',
-        canActivate: [AuthGuard],
+        //canActivate: [AuthGuard],
         loadChildren: () =>
             import('./main/orders/order.module').then((m) => m.OrderModule),
     },

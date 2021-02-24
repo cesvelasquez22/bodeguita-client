@@ -1,0 +1,91 @@
+<app-loading-overlay [isActive]="loading"></app-loading-overlay>
+<div class="page-layout simple fullwidth" fxLayout="column">
+    <app-title-header
+        [icon]="'assistant'"
+        [section]="'Órdenes de Ventas'"
+        [title]="'Listado'"
+    ></app-title-header>
+    <div fxLayout="column" class="mx-12 mt-32">
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <div
+                fxLayout="row"
+                fxLayoutAlign="end center"
+                class="mt-12 create-button"
+            >
+                <button mat-fab class="accent" routerLink="create">
+                    <mat-icon>playlist_add</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div fxLayout="column" class="mx-12">
+            <div fxFlex="100" class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" style="width: 100%">
+                    <!-- Position Column -->
+                    <ng-container matColumnDef=idOrdenVenta>
+                        <th mat-header-cell *matHeaderCellDef>No. de Venta</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.idOrdenVenta }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Category Column -->
+                    <ng-container matColumnDef="fechadesalida">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Fecha de Venta
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.fechadesalida | date: 'dd/MM/yyyy' }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Brand Column -->
+                    <ng-container matColumnDef="idcliente">
+                        <th mat-header-cell *matHeaderCellDef>Cliente</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.idcliente }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Dimension Column 
+                    <ng-container matColumnDef="tipo">
+                        <th mat-header-cell *matHeaderCellDef>Forma de pago</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.tipo }}
+                        </td>
+                    </ng-container>
+
+                 
+                    <ng-container matColumnDef="fechaCreacion">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Fecha de emisión
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.fechaCreacion | date: 'dd/MM/yyyy' }}
+                        </td>
+                    </ng-container>
+                -->
+
+                    <!-- Unit price Column -->
+                    <ng-container matColumnDef="estado">
+                        <th mat-header-cell *matHeaderCellDef>estado</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.estado }}
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr
+                        mat-row
+                        *matRowDef="let row; columns: displayedColumns"
+                    ></tr>
+                </table>
+                <mat-paginator
+                    fxLayoutAlign="end center"
+                    style="width: 100%"
+                    [pageSizeOptions]="[10, 20]"
+                    showFirstLastButtons
+                ></mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>

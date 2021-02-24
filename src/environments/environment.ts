@@ -15,6 +15,7 @@ export const environment = {
     categoriaPrefix: 'categoria',
     dimensionPrefix: 'dimension',
     ordenesCompraPrefix: 'OrdenesCompra',
+    ordenesVentaPrefix: 'OrdenesVenta',
     proveedorPrefix: 'proveedor',
 };
 
