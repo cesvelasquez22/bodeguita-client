@@ -233,31 +233,33 @@
                                     <span class="mat-subheading-2"
                                         ><strong>Fecha expectativa de entrega</strong></span
                                     >
-                                    <div fxLayout="row"></div>
+                                    <div fxLayout="row">
+                                        <mat-form-field>
+                                            <input
+                                                matInput
+                                                [matDatepicker]="expectDate"
+                                                readonly
+                                                formControlName="FechaEspectativa"
+                                            />
+                                            <mat-datepicker-toggle
+                                                matSuffix
+                                                [for]="expectDate"
+                                            ></mat-datepicker-toggle>
+                                            <mat-datepicker #expectDate></mat-datepicker>
+                                            <mat-error
+                                                *ngIf="
+                                                    purchaseOrderForm
+                                                        .get('FechaEspectativa')
+                                                        .hasError('required')
+                                                "
+                                            >
+                                                La fecha expectativa es requerida
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
                                 </div>
                             </div>
-                            <mat-form-field>
-                                <input
-                                    matInput
-                                    [matDatepicker]="expectDate"
-                                    readonly
-                                    formControlName="FechaEspectativa"
-                                />
-                                <mat-datepicker-toggle
-                                    matSuffix
-                                    [for]="expectDate"
-                                ></mat-datepicker-toggle>
-                                <mat-datepicker #expectDate></mat-datepicker>
-                                <mat-error
-                                    *ngIf="
-                                        purchaseOrderForm
-                                            .get('FechaEspectativa')
-                                            .hasError('required')
-                                    "
-                                >
-                                    La fecha expectativa es requerida
-                                </mat-error>
-                            </mat-form-field>
+                            
                         </div>
                     </div>
                 </form>
