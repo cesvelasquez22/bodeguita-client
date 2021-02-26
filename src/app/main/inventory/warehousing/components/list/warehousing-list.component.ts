@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { IProduct } from 'app/main/inventory/product/models/product.model';
-import { ProductService } from 'app/main/inventory/product/services/product/product.service';
-import { Subject, combineLatest } from 'rxjs';
-import { Inventory } from '../../models/inventory';
-import { InventoryService } from "../../services/inventory.service";
+import { Subject } from 'rxjs';
+import { IWarehousing } from '../../models/warehousing.model';
+import { WarehousingService } from "../../services/warehousing.service";
 
 @Component({
     selector: 'app-warehousing-list',
@@ -24,14 +22,13 @@ export class WarehousingListComponent implements OnInit {
         'cantidad',
     ];
 
-    dataSource = new MatTableDataSource<Inventory>([]);
+    dataSource = new MatTableDataSource<IWarehousing>([]);
     @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
     private unsubscribe$: Subject<void> = new Subject();
 
     constructor(
-        private inventoryService: InventoryService,
-        private productService: ProductService
+        private warehousingService: WarehousingService,
     ) { }
 
     ngOnInit(): void {
@@ -45,12 +42,12 @@ export class WarehousingListComponent implements OnInit {
 
     getInventoryList() {
         this.loading = true;
-        this.inventoryService.getInventoryList()
+        this.warehousingService.getInventoryList()
             .subscribe(
                 (productos) => {
                     console.log(productos);
                     if (productos && productos.length > 0) {
-                        this.dataSource = new MatTableDataSource<Inventory>(productos);
+                        this.dataSource = new MatTableDataSource<IWarehousing>(productos);
                         this.dataSource.paginator = this.paginator;
                     }
                     this.loading = false;
