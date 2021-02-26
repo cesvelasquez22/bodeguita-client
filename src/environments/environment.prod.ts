@@ -12,4 +12,5 @@ export const environment = {
     dimensionPrefix: 'dimension',
     ordenesCompraPrefix: 'OrdenesCompra',
     proveedorPrefix: 'proveedor',
+    unidadesMedidasPrefix: 'unidadesMedidas',
 };

@@ -11,7 +11,28 @@
 //     background-color: white;
 // }
 
+app-full-layout-container,
+app-simple-layout-container{
+    width: 100%;
+}
+
+app-login #login{
+    min-height: 100vh;
+}
+
 .create-button {
     position: absolute;
     padding-right: 2%;
+}
+
+.left-align {
+    text-align: left;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.center-align {
+    text-align: center;
 }

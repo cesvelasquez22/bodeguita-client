@@ -11,7 +11,7 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Inicio',
                 type     : 'item',
                 icon     : 'home',
-                url      : '/home',
+                url      : 'home',
             }
         ]
     },
@@ -25,14 +25,14 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Inventario',
                 type     : 'item',
                 icon     : 'ballot',
-                url      : '/inventory',
+                url      : 'inventory',
             },
             {
                 id       : 'orders',
                 title    : 'Órdenes',
                 type     : 'item',
                 icon     : 'assignment',
-                url      : '/orders',
+                url      : 'orders',
             },
         ]
     },
@@ -46,21 +46,21 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Usuarios',
                 type     : 'item',
                 icon     : 'person_pin',
-                url      : '/users',
+                url      : 'users',
             },
             {
                 id       : 'customers',
                 title    : 'Clientes',
                 type     : 'item',
                 icon     : 'person',
-                url      : '/customers',
+                url      : 'customers',
             },
             {
                 id       : 'providers',
                 title    : 'Proveedores',
                 type     : 'item',
                 icon     : 'contacts',
-                url      : '/providers',
+                url      : 'providers',
             },
         ]
     },

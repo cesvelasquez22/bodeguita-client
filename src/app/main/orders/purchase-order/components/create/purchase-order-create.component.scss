@@ -13,3 +13,112 @@
         width: 100%;
     }
 }
+
+td mat-form-field {
+    font-size: 12px;
+    width: 98%;
+    padding: 0 2%;
+}
+
+.summary-body {
+    margin: 1%;
+}
+
+// Column details styles
+.mat-column-Posicion {
+	word-wrap: break-word !important;
+	white-space: unset !important;
+	// flex: 0 0 5% !important;
+	width: 5% !important;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: break-word;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+
+.mat-column-IDProducto {
+	word-wrap: break-word !important;
+	white-space: unset !important;
+	// flex: 0 0 5% !important;
+	width: 30% !important;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: break-word;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+
+.mat-column-IDUnidadMedida {
+	word-wrap: break-word !important;
+	white-space: unset !important;
+	// flex: 0 0 5% !important;
+	width: 20% !important;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: break-word;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+
+.mat-column-Cantidad {
+	word-wrap: break-word !important;
+	white-space: unset !important;
+	// flex: 0 0 5% !important;
+	width: 9% !important;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: break-word;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+
+.mat-column-PrecioUnitario {
+	word-wrap: break-word !important;
+	white-space: unset !important;
+	// flex: 0 0 5% !important;
+	width: 13% !important;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: break-word;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+
+.mat-column-Subtotal {
+	word-wrap: break-word !important;
+	white-space: unset !important;
+	// flex: 0 0 5% !important;
+	width: 13% !important;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: break-word;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}
+
+.mat-column-Actions {
+	word-wrap: break-word !important;
+	white-space: unset !important;
+	// flex: 0 0 5% !important;
+	width: 10% !important;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	word-break: break-word;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+}

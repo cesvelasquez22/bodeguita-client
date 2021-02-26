@@ -6,6 +6,7 @@ import { PurchaseOrderCreateComponent } from './components/create/purchase-order
 import { PurchaseOrderListComponent } from './components/list/purchase-order-list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from 'app/shared/shared.module';
+import { DigitOnlyModule } from '@uiowa/digit-only';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PurchaseOrderService } from './services/purchase-order/purchase-order.service';
 
@@ -19,6 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [PurchaseOrderCreateComponent, PurchaseOrderListComponent],
@@ -28,6 +30,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     SharedModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    DigitOnlyModule,
 
     // Material
     MatTableModule,
@@ -39,6 +42,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatToolbarModule,
   ],
   providers: [
       PurchaseOrderService

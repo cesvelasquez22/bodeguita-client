@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
-import { IProduct } from '../../models/product.model';
+import { IProduct } from '../../../../../core/models/product.model';
 import { ProductService } from '../../services/product/product.service';
 
 @Component({
