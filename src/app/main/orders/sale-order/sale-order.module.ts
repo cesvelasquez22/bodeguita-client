@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SaleOrderRoutingModule } from './sale-order-routing.module';
-import { SaleOrderCreateComponent } from './components/create/sale-order-create/sale-order-create.component';
-import {SaleOrderListComponent} from './components/list/sale-order-list/sale-order-list.component';
+import { SaleOrderCreateComponent } from './components/create/sale-order-create.component';
+import { SaleOrderListComponent } from './components/list/sale-order-list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from '../../../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +19,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { SaleOrderService } from './services/sale-order.service';
 
 
 @NgModule({
@@ -40,6 +41,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
+  ],
+  providers: [
+      SaleOrderService
   ]
 })
 export class SaleOrderModule { }

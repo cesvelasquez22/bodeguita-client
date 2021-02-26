@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {IDSaleOrder} from '../Models/sale-order';
+import {ISaleOrder} from '../models/sale-order';
 import { environment } from 'environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SaleOrderService {
 
   constructor(
@@ -13,7 +11,7 @@ export class SaleOrderService {
   ) { }
 
   getSalesOrders(){
-    return this.http.get<IDSaleOrder[]>(`${environment.API_URL + environment.ordenesVentaPrefix}/Lista`);
+    return this.http.get<ISaleOrder[]>(`${environment.API_URL + environment.ordenesVentaPrefix}/Lista`);
 
   }
 

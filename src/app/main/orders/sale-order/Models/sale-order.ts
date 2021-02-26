@@ -1,15 +1,15 @@
-export class IDSaleOrder {
+export class ISaleOrder {
 
-    IdordenVenta: number;
-    FechaCreacion: Date;
-    FechaSalida: Date;
-    UserCreatedId: Date;
-    Idcliente: number;
-    estadoOrdenVenta: IdSaleOrderState;
+    idOrdenVenta: number;
+    fechaCreacion: Date;
+    fechaSalida: Date;
+    idCliente: number;
+    tipo: number;
+    estado: ISaleOrderState;
 
 }
 
-export class IdSaleOrderState {
+export class ISaleOrderState {
     IdEstadoOrdenVenta: number;
     Nombre: string;
 }

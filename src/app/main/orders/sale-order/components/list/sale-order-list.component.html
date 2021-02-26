@@ -21,32 +21,29 @@
             <div fxFlex="100" class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource" style="width: 100%">
                     <!-- Position Column -->
-                    <ng-container matColumnDef=idOrdenVenta>
-                        <th mat-header-cell *matHeaderCellDef>No. de Venta</th>
+                    <ng-container matColumnDef="posicion">
+                        <th mat-header-cell *matHeaderCellDef>#</th>
+                        <td mat-cell *matCellDef="let element; index as i">
+                            {{ i + 1 }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="idOrdenVenta">
+                        <th mat-header-cell *matHeaderCellDef>No. de Orden</th>
                         <td mat-cell *matCellDef="let element">
                             {{ element.idOrdenVenta }}
                         </td>
                     </ng-container>
 
-                    <!-- Category Column -->
-                    <ng-container matColumnDef="fechadesalida">
-                        <th mat-header-cell *matHeaderCellDef>
-                            Fecha de Venta
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{ element.fechadesalida | date: 'dd/MM/yyyy' }}
-                        </td>
-                    </ng-container>
-
                     <!-- Brand Column -->
-                    <ng-container matColumnDef="idcliente">
+                    <ng-container matColumnDef="idCliente">
                         <th mat-header-cell *matHeaderCellDef>Cliente</th>
                         <td mat-cell *matCellDef="let element">
-                            {{ element.idcliente }}
+                            {{ element.idCliente }}
                         </td>
                     </ng-container>
 
-                    <!-- Dimension Column 
                     <ng-container matColumnDef="tipo">
                         <th mat-header-cell *matHeaderCellDef>Forma de pago</th>
                         <td mat-cell *matCellDef="let element">
@@ -54,20 +51,29 @@
                         </td>
                     </ng-container>
 
-                 
-                    <ng-container matColumnDef="fechaCreacion">
+                     <!-- Category Column -->
+                     <ng-container matColumnDef="fechaCreacion">
                         <th mat-header-cell *matHeaderCellDef>
-                            Fecha de emisión
+                            Fecha de Emisión
                         </th>
                         <td mat-cell *matCellDef="let element">
-                            {{ element.fechaCreacion | date: 'dd/MM/yyyy' }}
+                            {{ element.fechaCreacion | date: "dd/MM/yyyy" }}
                         </td>
                     </ng-container>
-                -->
+
+                    <!-- fechaSalida Column -->
+                    <ng-container matColumnDef="fechaSalida">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Fecha de Venta
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.fechaSalida | date: "dd/MM/yyyy" }}
+                        </td>
+                    </ng-container>
 
                     <!-- Unit price Column -->
                     <ng-container matColumnDef="estado">
-                        <th mat-header-cell *matHeaderCellDef>estado</th>
+                        <th mat-header-cell *matHeaderCellDef>Estado</th>
                         <td mat-cell *matCellDef="let element">
                             {{ element.estado }}
                         </td>
