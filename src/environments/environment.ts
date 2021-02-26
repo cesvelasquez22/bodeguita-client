@@ -14,7 +14,8 @@ export const environment = {
     marcaPrefix: 'marca',
     categoriaPrefix: 'categoria',
     dimensionPrefix: 'dimension',
-    ordenesCompraPrefix: 'ordenesCompra',
+    ordenesCompraPrefix: 'OrdenesCompra',
+    inventarioPrefix: 'inventario',
     proveedorPrefix: 'proveedor',
     unidadesMedidasPrefix: 'unidadesMedidas',
 };

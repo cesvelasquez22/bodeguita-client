@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Subject } from 'rxjs';
+import { IWarehousing } from '../../models/warehousing.model';
+import { WarehousingService } from "../../services/warehousing.service";
 
 @Component({
     selector: 'app-warehousing-list',
@@ -11,7 +16,46 @@ export class WarehousingListComponent implements OnInit {
     //
     loading: boolean;
 
-    constructor() {}
+    displayedColumns: string[] = [
+        '#',
+        'idproducto',
+        'cantidad',
+    ];
 
-    ngOnInit(): void {}
+    dataSource = new MatTableDataSource<IWarehousing>([]);
+    @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+
+    private unsubscribe$: Subject<void> = new Subject();
+
+    constructor(
+        private warehousingService: WarehousingService,
+    ) { }
+
+    ngOnInit(): void {
+        this.getInventoryList();
+    }
+
+    ngOnDestroy() {
+        this.unsubscribe$.next();
+        this.unsubscribe$.complete();
+    }
+
+    getInventoryList() {
+        this.loading = true;
+        this.warehousingService.getInventoryList()
+            .subscribe(
+                (productos) => {
+                    console.log(productos);
+                    if (productos && productos.length > 0) {
+                        this.dataSource = new MatTableDataSource<IWarehousing>(productos);
+                        this.dataSource.paginator = this.paginator;
+                    }
+                    this.loading = false;
+                },
+                (err) => {
+                    (this.loading = false)
+                }
+            );
+    }
+
 }
