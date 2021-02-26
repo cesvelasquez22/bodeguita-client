@@ -12,6 +12,7 @@ export const environment = {
     dimensionPrefix: 'dimension',
     ordenesCompraPrefix: 'OrdenesCompra',
     inventarioPrefix: 'inventario',
+    ordenesVentaPrefix: 'OrdenesVenta',
     proveedorPrefix: 'proveedor',
     unidadesMedidasPrefix: 'unidadesMedidas',
 };
