@@ -11,6 +11,8 @@ export const environment = {
     // ─── URL CONTROLLERS PREFIX ─────────────────────────────────────────────────────
     //
     productoPrefix: 'producto',
+    rolesPrefix: 'roles',
+    userPrefix: 'Usuarios',
     marcaPrefix: 'marca',
     categoriaPrefix: 'categoria',
     dimensionPrefix: 'dimension',
