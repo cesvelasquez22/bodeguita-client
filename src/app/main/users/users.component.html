@@ -1,1 +1,57 @@
-<p>users works!</p>
+<div
+    class="page-layout simple fullwidth"
+    fxLayout="column"
+>
+    <app-title-header
+        [icon]="'assistant'"
+        [section]="'Accesos directos'"
+        [title]="'Usuarios'"
+    ></app-title-header>
+
+    <div fxLayout="row" fxLayout.xs="column" fxFlex="100">
+        <div fxLayout="row" fxFlex="100" class="m-36">
+            <div fxLayout="column" fxFlex="25" class="mx-12">
+                <mat-card class="mat-elevation-z8">
+                    <mat-card-header>
+                        <div mat-card-avatar class="avatar-icon">
+                            <mat-icon>list_alt</mat-icon>
+                        </div>
+                        <mat-card-title>Usuarios</mat-card-title>
+                        <mat-card-subtitle>Admin</mat-card-subtitle>
+                    </mat-card-header>
+                    <img
+                        mat-card-image
+                        src="assets/images/inventory/products-stats.svg"
+                        alt="Photo of a Shiba Inu"
+                    />
+                    <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+                        <button mat-raised-button color="primary" routerLink="users">
+                            Listado
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            <div fxLayout="column" fxFlex="25" class="mx-12">
+                <mat-card class="mat-elevation-z8">
+                    <mat-card-header>
+                        <div mat-card-avatar class="avatar-icon">
+                            <mat-icon>list_alt</mat-icon>
+                        </div>
+                        <mat-card-title>Roles</mat-card-title>
+                        <mat-card-subtitle>Admin</mat-card-subtitle>
+                    </mat-card-header>
+                    <img
+                        mat-card-image
+                        src="assets/images/inventory/data-processing.svg"
+                        alt="Photo of a Shiba Inu"
+                    />
+                    <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+                        <button mat-raised-button color="primary" routerLink="roles">
+                            Listado
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

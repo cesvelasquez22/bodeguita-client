@@ -6,7 +6,7 @@ import {IDrole} from '../../models/idrole';
 import { RoleService } from '../../services/role.service';
 
 @Component({
-  selector: 'app-list',
+  selector: 'app-role-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })

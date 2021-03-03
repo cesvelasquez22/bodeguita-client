@@ -2,8 +2,8 @@
 <div class="page-layout simple fullwidth" fxLayout="column">
     <app-title-header
         [icon]="'assistant'"
-        [section]="'Usuarios'"
-        [title]="'Roles'"
+        [section]="'Roles'"
+        [title]="'Listado'"
     ></app-title-header>
     <div fxLayout="column" class="mx-12 mt-32">
         <div fxLayout="row" fxLayoutAlign="end center">
@@ -19,7 +19,7 @@
         </div>
         <div fxLayout="column" class="mx-12">
             <div fxFlex="100" class="mat-elevation-z8">
-                <table mat-table [dataSource]="dataSource" style="width: 100%">
+                <table mat-table [dataSource]="datasource" style="width: 100%">
                     <!-- Position Column -->
                     <ng-container matColumnDef="#">
                         <th mat-header-cell *matHeaderCellDef>No.</th>
@@ -29,46 +29,28 @@
                     </ng-container>
 
                     <!-- Category Column -->
-                    <ng-container matColumnDef="IDCategoria">
-                        <th mat-header-cell *matHeaderCellDef>Categoria</th>
+                    <ng-container matColumnDef="ID Role">
+                        <th mat-header-cell *matHeaderCellDef>Role ID</th>
                         <td mat-cell *matCellDef="let element">
-                            {{ element.IDCategoria }}
+                            {{ element.Idrole }}
                         </td>
                     </ng-container>
 
                     <!-- Brand Column -->
-                    <ng-container matColumnDef="IDMarca">
-                        <th mat-header-cell *matHeaderCellDef>Marca</th>
+                    <ng-container matColumnDef="Nombre">
+                        <th mat-header-cell *matHeaderCellDef>Nombre</th>
                         <td mat-cell *matCellDef="let element">
-                            {{ element.IDMarca }}
+                            {{ element.Nombre }}
                         </td>
                     </ng-container>
 
                     <!-- Dimension Column -->
-                    <ng-container matColumnDef="IDDimension">
-                        <th mat-header-cell *matHeaderCellDef>Dimension</th>
+                    <ng-container matColumnDef="Descripcion">
+                        <th mat-header-cell *matHeaderCellDef>Descripcion</th>
                         <td mat-cell *matCellDef="let element">
-                            {{ element.IDDimension }}
+                            {{ element.Descripcion }}
                         </td>
                     </ng-container>
-
-                    <!-- Unit price Column -->
-                    <ng-container matColumnDef="PrecioUnitario">
-                        <th mat-header-cell *matHeaderCellDef>
-                            Precio Unitario
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{ element.PrecioUnitario | currency: "L. " }}
-                        </td>
-                    </ng-container>
-
-                    <!-- Unit price Column -->
-                    <!-- <ng-container matColumnDef="Estado">
-                        <th mat-header-cell *matHeaderCellDef>Estado</th>
-                        <td mat-cell *matCellDef="let element">
-                            {{ element.Estado }}
-                        </td>
-                    </ng-container> -->
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr
