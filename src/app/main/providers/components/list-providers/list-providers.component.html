@@ -1,0 +1,118 @@
+<app-loading-overlay [isActive]="loading"></app-loading-overlay>
+<div class="page-layout simple fullwidth" fxLayout="column">
+    <app-title-header
+        [icon]="'assistant'"
+        [section]="'Proveedores'"
+        [title]="'Listado'"
+    ></app-title-header>
+    <div fxLayout="column" class="mx-12 mt-32">
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <div
+                fxLayout="row"
+                fxLayoutAlign="end center"
+                class="mt-12 create-button"
+            >
+                <button mat-fab class="accent" routerLink="create">
+                    <mat-icon>playlist_add</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div fxLayout="column" class="mx-12">
+            <div fxFlex="100" class="mat-elevation-z8">
+                <table mat-table [dataSource]="datasource" style="width: 100%">
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="#">
+                        <th mat-header-cell *matHeaderCellDef>No.</th>
+                        <td mat-cell *matCellDef="let element; index as i">
+                            {{ i + 1 }}
+                        </td>
+                    </ng-container>
+
+                    <!-- ID del Proveedor -->
+                    <ng-container matColumnDef="ID Proveedor">
+                        <th mat-header-cell *matHeaderCellDef>ID Proveedor</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.IdProveedor }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Nombre Proveedor -->
+                    <ng-container matColumnDef="Nombre">
+                        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.Nombre }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Direccion Proveedor -->
+                    <ng-container matColumnDef="Direccion">
+                        <th mat-header-cell *matHeaderCellDef>Direccion</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.Direccion }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Telefono Proveedor -->
+                    <ng-container matColumnDef="Telefono">
+                        <th mat-header-cell *matHeaderCellDef>Telefono</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.Telefono }}
+                        </td>
+                    </ng-container>
+
+                    <!-- ID Usuario que creo -->
+                    <ng-container matColumnDef="IdusuarioCreado">
+                        <th mat-header-cell *matHeaderCellDef>Creado Por:</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.IdusuarioCreado }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Fecha Creacion Proveedor -->
+                    <ng-container matColumnDef="FechaCreado">
+                        <th mat-header-cell *matHeaderCellDef>Fecha Creación</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.FechaCreado }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Usuario Actualizado?? -->
+                    <ng-container matColumnDef="IdusuarioActualizo">
+                        <th mat-header-cell *matHeaderCellDef>Usuario</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.IdusuarioActualizo }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Brand Column -->
+                    <ng-container matColumnDef="FechaActualizado">
+                        <th mat-header-cell *matHeaderCellDef>Actualizado:</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.FechaActualizado }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Dimension Column -->
+                    <ng-container matColumnDef="Estado">
+                        <th mat-header-cell *matHeaderCellDef>Estado</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.Estado }}
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr
+                        mat-row
+                        *matRowDef="let row; columns: displayedColumns"
+                    ></tr>
+                </table>
+                <mat-paginator
+                    fxLayoutAlign="end center"
+                    style="width: 100%"
+                    [pageSizeOptions]="[10, 20]"
+                    showFirstLastButtons
+                ></mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>
