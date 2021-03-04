@@ -12,10 +12,7 @@
     <div fxLayout="row" fxLayout.xs="column">
         <div fxLayout="column" fxFlex="100" class="m-36">
             <mat-card>
-                <form
-                    [formGroup]="purchaseOrderForm"
-                    *ngIf="purchaseOrderInfo$ | async as purchaseOrderInfo"
-                >
+                <form [formGroup]="purchaseOrderForm">
                     <!--
                       -- PURCHASE ORDER HEADER
                       -->
@@ -79,9 +76,6 @@
                                         <mat-select
                                             formControlName="Idproveedor"
                                             #providerSelect
-                                            (selectionChange)="
-                                                purchaseOrderSetData()
-                                            "
                                         >
                                             <!-- <mat-option #customerOption>
                                                 <ngx-mat-select-search
@@ -92,7 +86,7 @@
                                             </mat-option> -->
                                             <mat-option
                                                 *ngFor="
-                                                    let provider of purchaseOrderInfo[0]
+                                                    let provider of providers
                                                 "
                                                 [value]="provider.IdProveedor"
                                             >
@@ -141,14 +135,18 @@
                           -->
                             <div
                                 *ngIf="
-                                    purchaseOrderProvider &&
-                                    viewModePurchaseOrder === 2
+                                    viewModePurchaseOrder === 2 &&
+                                    purchaseOrderProvider
                                 "
                             >
-                                <strong>Dirección: </strong
-                                >{{ purchaseOrderProvider.Direccion }}
-                                <strong>Telefono: </strong
-                                >{{ purchaseOrderProvider.Telefono }}
+                                <div>
+                                    <strong>Dirección: </strong
+                                    >{{ purchaseOrderProvider.Direccion }}
+                                </div>
+                                <div>
+                                    <strong>Telefono: </strong
+                                    >{{ purchaseOrderProvider.Telefono }}
+                                </div>
                             </div>
                             <!--
                           -- EDIT
@@ -237,6 +235,9 @@
                                             <input
                                                 matInput
                                                 [matDatepicker]="expectDate"
+                                                (dateInput)="
+                                                    inputExpectDate($event)
+                                                "
                                                 readonly
                                                 formControlName="FechaEspectativa"
                                             />
@@ -304,9 +305,7 @@
                                             "
                                         >
                                             <mat-option
-                                                *ngFor="
-                                                    let product of purchaseOrderInfo[1]
-                                                "
+                                                *ngFor="let product of products"
                                                 [value]="product.IDProducto"
                                             >
                                                 {{
@@ -342,7 +341,7 @@
                                         >
                                             <mat-option
                                                 *ngFor="
-                                                    let measureUnit of purchaseOrderInfo[2]
+                                                    let measureUnit of measureUnits
                                                 "
                                                 [value]="
                                                     measureUnit.IdUnidadesMedidas
@@ -356,16 +355,21 @@
                             </ng-container>
 
                             <!-- Unit price Column -->
-                            <ng-container matColumnDef="PrecioUnitario">
+                            <ng-container matColumnDef="PrecioCompra">
                                 <th mat-header-cell *matHeaderCellDef>
-                                    Precio unitario
+                                    Precio de compra
                                 </th>
                                 <td
                                     mat-cell
                                     *matCellDef="let element; index as i"
                                     [formGroupName]="i"
                                 >
-                                    0
+                                    L.{{
+                                        (productSelected
+                                            ? productSelected.PrecioCompra
+                                            : 0
+                                        ) | number: "0.2-2"
+                                    }}
                                 </td>
                             </ng-container>
 
@@ -402,16 +406,23 @@
                             </ng-container>
 
                             <!-- Subtotal Column -->
-                            <ng-container matColumnDef="Subtotal">
+                            <ng-container matColumnDef="TotalUnidadCompra">
                                 <th mat-header-cell *matHeaderCellDef>
-                                    Subtotal
+                                    Total unidad compra
                                 </th>
                                 <td
                                     mat-cell
                                     *matCellDef="let element; index as i"
                                     [formGroupName]="i"
                                 >
-                                    0
+                                    L.
+                                    {{
+                                        (viewModePurchaseOrder === 2 &&
+                                        details[i].TotalUnidadCompra
+                                            ? details[i].TotalUnidadCompra
+                                            : 0
+                                        ) | number: "0.2-2"
+                                    }}
                                 </td>
                             </ng-container>
 
@@ -510,13 +521,45 @@
                                 fxFlex="50"
                             >
                                 <div class="right-align">
-                                    <span class="mat-subheading-2">0.00</span>
+                                    <span class="mat-subheading-2">
+                                        L.
+                                        {{
+                                            (purchaseOrderForm.get("SubTotal")
+                                                .value
+                                                ? purchaseOrderForm.get(
+                                                      "SubTotal"
+                                                  ).value
+                                                : 0
+                                            ) | number: "0.2-2"
+                                        }}
+                                    </span>
                                 </div>
                                 <div class="right-align">
-                                    <span class="mat-subheading-2">0.00</span>
+                                    <span class="mat-subheading-2">
+                                        L.
+                                        {{
+                                            (purchaseOrderForm.get("Impuesto")
+                                                .value
+                                                ? purchaseOrderForm.get(
+                                                      "Impuesto"
+                                                  ).value
+                                                : 0
+                                            ) | number: "0.2-2"
+                                        }}
+                                    </span>
                                 </div>
                                 <div class="right-align">
-                                    <span class="mat-subheading-2">0.00</span>
+                                    <span class="mat-subheading-2">
+                                        L.
+                                        {{
+                                            (purchaseOrderForm.get("Total")
+                                                .value
+                                                ? purchaseOrderForm.get("Total")
+                                                      .value
+                                                : 0
+                                            ) | number: "0.2-2"
+                                        }}
+                                    </span>
                                 </div>
                             </div>
                         </div>

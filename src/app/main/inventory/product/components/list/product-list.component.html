@@ -52,13 +52,23 @@
                         </td>
                     </ng-container>
 
-                    <!-- Unit price Column -->
-                    <ng-container matColumnDef="PrecioUnitario">
+                    <!-- Purchase price Column -->
+                    <ng-container matColumnDef="PrecioCompra">
                         <th mat-header-cell *matHeaderCellDef>
-                            Precio Unitario
+                            Precio de compra
                         </th>
                         <td mat-cell *matCellDef="let element">
-                            {{ element.PrecioUnitario | currency: "L. " }}
+                            {{ element.PrecioCompra | currency: "L. " }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Sale price Column -->
+                    <ng-container matColumnDef="PrecioVenta">
+                        <th mat-header-cell *matHeaderCellDef>
+                            Precio de venta
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.PrecioVenta | currency: "L. " }}
                         </td>
                     </ng-container>
 

@@ -7,9 +7,10 @@ import { SaleOrderListComponent } from './components/list/sale-order-list.compon
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from '../../../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DigitOnlyModule } from '@uiowa/digit-only';
 
 
-//Material
+// Material
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { SaleOrderService } from './services/sale-order.service';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -30,8 +32,9 @@ import { SaleOrderService } from './services/sale-order.service';
     SharedModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    DigitOnlyModule,
 
-    //Material
+    // Material
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
@@ -41,6 +44,7 @@ import { SaleOrderService } from './services/sale-order.service';
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatToolbarModule,
   ],
   providers: [
       SaleOrderService

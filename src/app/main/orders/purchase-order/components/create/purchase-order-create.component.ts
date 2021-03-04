@@ -3,8 +3,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { IProvider } from 'app/core/models/provider.model';
 import { EPaymentMethod } from 'app/core/models/paymentMethod.enum';
-import { Observable, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, combineLatest, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 import { PurchaseOrderService } from '../../services/purchase-order/purchase-order.service';
 import { IPurchaseOrderDetail } from '../../models/purchase-order.model';
 import { MatTableDataSource } from '@angular/material/table';
@@ -29,9 +29,13 @@ export class PurchaseOrderCreateComponent implements OnInit {
     // ─── RELATED TO FORM ────────────────────────────────────────────────────────────
     //
     purchaseOrderForm: FormGroup;
-    purchaseOrderInfo$: Observable<[IProvider[], IProduct[], IMeasureUnit[]]>;
-    purchaseOrderProvider: IProvider;
     paymentMethod = EPaymentMethod;
+    // SELECTS
+    providers: IProvider[] = [];
+    products: IProduct[] = [];
+    measureUnits: IMeasureUnit[] = [];
+    purchaseOrderProvider: IProvider;
+    productSelected: IProduct;
 
     //
     // ─── RELATED TO DETAILS TABLE ───────────────────────────────────────────────────────────
@@ -41,12 +45,17 @@ export class PurchaseOrderCreateComponent implements OnInit {
         'IDProducto',
         'IDUnidadMedida',
         'Cantidad',
-        'PrecioUnitario',
-        'Subtotal',
+        'PrecioCompra',
+        'TotalUnidadCompra',
         'Actions',
     ];
     dataSource = new MatTableDataSource<IPurchaseOrderDetail>([]);
     details: IPurchaseOrderDetail[] = [];
+
+    //
+    // ─── UNSUBSCRIBE ALL ────────────────────────────────────────────────────────────
+    //
+    private unsubscribe$: Subject<void> = new Subject();
 
     constructor(
         private formBuilder: FormBuilder,
@@ -62,26 +71,17 @@ export class PurchaseOrderCreateComponent implements OnInit {
             FechaEspectativa: [null, [Validators.required]],
             Idproveedor: [null, [Validators.required]], 
             Tipo: [null, [Validators.required]],
-            IdestadoOrdenCompra: [true, [Validators.required]],
+            IdestadoOrdenCompra: [1, [Validators.required]],
+            SubTotal: [0, []],
+            Impuesto: [0, []],
+            Total: [0, []],
             detalleOrdenCompra: new FormArray([]),
         });
     }
 
     ngOnInit(): void {
         this.getPurchaseOrderInfo();
-        console.log(this.paymentMethod);
-    }
-
-    purchaseOrderSetData() {
-        this.purchaseOrderInfo$.pipe(
-            map((data => {
-                this.purchaseOrderProvider = data[0].find(provider => provider.IdProveedor = this.Idproveedor);
-            }))
-        );
-    }
-
-    get Idproveedor(): number {
-        return this.purchaseOrderForm.controls.Idproveedor.value;
+        this.onChanges();
     }
 
     getPurchaseOrderInfo() {
@@ -97,17 +97,39 @@ export class PurchaseOrderCreateComponent implements OnInit {
             // ─── CREATE ──────────────────────────────────────────────────────
             //
             this.viewModePurchaseOrder = 2;
-            this.purchaseOrderInfo$ = combineLatest(
+            const purchaseOrderInfo$: Observable<[IProvider[], IProduct[], IMeasureUnit[]]> = combineLatest(
                 this.purchaseOrderService.getProviders(),
                 this.purchaseOrderService.getProducts(),
                 this.purchaseOrderService.getMeasureUnits(),
-
             );
 
-            this.purchaseOrderInfo$.subscribe(data => console.log(data));
+            purchaseOrderInfo$.pipe(takeUntil(this.unsubscribe$)).subscribe(data => {
+                if (data[0] && data[0].length > 0) {
+                    this.providers = data[0];
+                }
+
+                if (data[1] && data[1].length > 0) {
+                    this.products = data[1];
+                }
+
+                if (data[2] && data[2].length > 0) {
+                    this.measureUnits = data[2];
+                }
+            });
             this.loading = false;
         }
 
+    }
+
+    onChanges() {
+        //
+        // ─── PROVIDER CHANGES ────────────────────────────────────────────
+        //
+        this.purchaseOrderForm.controls.Idproveedor.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(providerChanges => {
+            if (providerChanges && providerChanges !== null) {
+                this.purchaseOrderProvider = this.providers.find(provider => provider.IdProveedor === providerChanges);
+            }
+        });
     }
 
     //
@@ -125,27 +147,18 @@ export class PurchaseOrderCreateComponent implements OnInit {
     //
     addProduct() {
         (this.purchaseOrderForm.get('detalleOrdenCompra') as FormArray).push(
-            this.createProduct(null)
+            this.createProduct()
         );
         this.details = (this.purchaseOrderForm.get('detalleOrdenCompra') as FormArray).value;
         this.dataSource = new MatTableDataSource<IPurchaseOrderDetail>(this.details);
     }
 
-    createProduct(product?: IPurchaseOrderDetail): FormGroup {
-        if (product) {
-            return this.formBuilder.group({
-                IDOrdenCompra: [product.IDOrdenCompra, []],
-                IDProducto: [product.IDProducto, []],
-                IDUnidadMedida: [product.IDUnidadMedida, []],
-                Cantidad: [product.Cantidad, []],
-            });
-        }
-
+    createProduct(): FormGroup {
         return this.formBuilder.group({
-            IDOrdenCompra: [0, []],
             IDProducto: [null, []],
             IDUnidadMedida: [null, []],
             Cantidad: [null, []],
+            TotalUnidadCompra: [null, []],
         });
     }
 
@@ -159,28 +172,43 @@ export class PurchaseOrderCreateComponent implements OnInit {
                 (this.purchaseOrderForm.controls.detalleOrdenCompra as FormArray).controls[index]
             ) as FormGroup).value
         );
-        console.log(item);
-        // if (item && item.quantity && item.unitPrice) {
-        //     item.Cantidad = item.Cantidad * 1;
-        //     item.unitPrice = item.unitPrice * 1;
-        //     ( (
-        //         ( this.purchaseOrderForm.controls.detalleOrdenCompra as FormArray).controls[index]
-        //     ) as FormGroup).controls.name.setValue(item.name);
-        //     ( (
-        //         ( this.purchaseOrderForm.controls.detalleOrdenCompra as FormArray).controls[index]
-        //     ) as FormGroup).controls.quantity.setValue(item.quantity);
-        //     ( (
-        //         ( this.purchaseOrderForm.controls.detalleOrdenCompra as FormArray).controls[index]
-        //     ) as FormGroup).controls.unitPrice.setValue(item.unitPrice);
-        //     ( (
-        //         ( this.purchaseOrderForm.controls.detalleOrdenCompra as FormArray).controls[index]
-        //     ) as FormGroup).controls.tax.setValue(item.tax);
-        //     ( (
-        //         ( this.purchaseOrderForm.controls.detalleOrdenCompra as FormArray).controls[index]
-        //     ) as FormGroup).controls.subtotal.setValue(item.quantity * item.unitPrice);
-        // }
-        // this.updateFooterSummary();
-        // this.calculateChange();
+        if (item && item.IDProducto) {
+            this.productSelected = this.products.find(product => product.IDProducto === item.IDProducto);
+        }
+        if (item && item.Cantidad) {
+            item.Cantidad = item.Cantidad * 1;
+            ( (
+                ( this.purchaseOrderForm.controls.detalleOrdenCompra as FormArray).controls[index]
+            ) as FormGroup).controls.Cantidad.setValue(item.Cantidad);
+            ( (
+                ( this.purchaseOrderForm.controls.detalleOrdenCompra as FormArray).controls[index]
+            ) as FormGroup).controls.TotalUnidadCompra.setValue(item.Cantidad * this.productSelected.PrecioCompra);
+        }
+        this.updateFooterSummary();
+    }
+
+    updateFooterSummary() {
+        this.details = (this.purchaseOrderForm.get('detalleOrdenCompra') as FormArray).value;
+        const sumSubtotal = this.details
+            .map((t) => {
+                if (t && t.TotalUnidadCompra) {
+                    return t.TotalUnidadCompra;
+                }
+                return 0;
+            })
+            .reduce((acc, value) => acc + value, 0);
+        const sumTax = this.details
+            .map((t) => {
+                if (t && t.TotalUnidadCompra) {
+                    return t.TotalUnidadCompra * 0.15;
+                }
+                return 0;
+            })
+            .reduce((acc, value) => acc + value, 0);
+        const total = sumSubtotal + sumTax;
+        this.purchaseOrderForm.controls.SubTotal.setValue(sumSubtotal);
+        this.purchaseOrderForm.controls.Impuesto.setValue(sumTax);
+        this.purchaseOrderForm.controls.Total.setValue(total);
     }
 
     clear() {
@@ -188,9 +216,18 @@ export class PurchaseOrderCreateComponent implements OnInit {
         this.purchaseOrderForm.controls.Idproveedor.setValue(null);
         this.purchaseOrderForm.controls.Tipo.setValue(null);
         this.purchaseOrderForm.controls.IdestadoOrdenCompra.setValue(null);
+        this.purchaseOrderForm.controls.SubTotal.setValue(0);
+        this.purchaseOrderForm.controls.Impuesto.setValue(0);
+        this.purchaseOrderForm.controls.Total.setValue(0);
         (this.purchaseOrderForm.get('detalleOrdenCompra') as FormArray).clear();
         this.dataSource = new MatTableDataSource<IPurchaseOrderDetail>([]);
     }
 
-    savePurchaseOrder() {}
+    inputExpectDate(expectDate: any) {
+        this.purchaseOrderForm.get('FechaEspectativa').setValue(expectDate.value._d);
+    }
+
+    savePurchaseOrder() {
+        console.log(this.purchaseOrderForm.value);
+    }
 }

@@ -14,6 +14,7 @@ export class IPurchaseOrderDetail {
     IDProducto: number;
     IDUnidadMedida: number;
     Cantidad: number;
+    TotalUnidadCompra: number;
 }
 
 export class IPurchaseOrderState {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IProduct } from 'app/core/models/product.model';
+import { IzitoastAlertService } from 'app/core/utils/izitoast-alert.service';
 import { combineLatest, Observable } from 'rxjs';
 import { IBrand } from '../../models/brand.model';
 import { ICategory } from '../../models/category.model';
@@ -33,7 +35,8 @@ export class ProductCreateComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private productService: ProductService
+        private productService: ProductService,
+        private izitoastAlertService: IzitoastAlertService,
     ) {
         this.buildForm();
         this.productId = this.route.snapshot.paramMap.get('id');
@@ -43,7 +46,8 @@ export class ProductCreateComponent implements OnInit {
         this.productForm = this.formBuilder.group({
             IDMarca: [null, [Validators.required]],
             IDCategoria: [null, [Validators.required]],
-            PrecioUnitario: [null, [Validators.required]],
+            PrecioCompra: [null, []],
+            PrecioVenta: [null, []],
             IDDimension: [null, [Validators.required]],
             Estado: [true, [Validators.required]],
         });
@@ -54,13 +58,27 @@ export class ProductCreateComponent implements OnInit {
     }
 
     onSubmit(form) {
-        console.log(this.productForm.value);
+        this.loading = true;
+        if (this.productForm.valid) {
+            const newProduct: IProduct = this.productForm.value;
+            this.productService.createProduct(newProduct).subscribe(data => {
+                console.log(data);
+                this.izitoastAlertService.CustomSuccessAlert('Se ha creado el producto con éxito');
+                this.loading = false;
+                this.router.navigate(['/products']);
+            }, (err) => {
+                console.log(err);
+                this.izitoastAlertService.CustomErrorAlert('Hubo un error intentando crear el producto');
+                this.loading = false;
+            });
+        }
     }
 
     clear() {
         this.productForm.get('IDMarca').setValue(0);
         this.productForm.get('IDCategoria').setValue(0);
-        this.productForm.get('PrecioUnitario').setValue(0);
+        this.productForm.get('PrecioCompra').setValue(0);
+        this.productForm.get('PrecioVenta').setValue(0);
         this.productForm.get('IDDimension').setValue(0);
     }
 

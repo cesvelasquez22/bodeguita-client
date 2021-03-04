@@ -24,7 +24,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
         'IDMarca',
         'IDDimension',
         'IDCategoria',
-        'PrecioUnitario',
+        'PrecioCompra',
+        'PrecioVenta',
         // 'Estado',
     ];
     dataSource = new MatTableDataSource<IProduct>([]);

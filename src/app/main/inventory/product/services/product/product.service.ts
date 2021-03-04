@@ -39,7 +39,9 @@ export class ProductService {
   //   :::::: P O S T : :  :   :    :     :        :          :
   // ──────────────────────────────────────────────────────────
   //
-
+  createProduct(product: IProduct) {
+    return this.http.post<IProduct>(`${environment.API_URL + environment.productoPrefix}/AddProducto`, product);
+  }
 
   //
   // ──────────────────────────────────────────────────── III ──────────

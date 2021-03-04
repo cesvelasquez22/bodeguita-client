@@ -81,25 +81,29 @@
                         </mat-form-field>
 
                         <mat-form-field appearance="outline" class="">
-                            <mat-label>Precio unitario</mat-label>
+                            <mat-label>Precio de compra</mat-label>
                             <input
                                 matInput
                                 type="text"
-                                formControlName="PrecioUnitario"
+                                formControlName="PrecioCompra"
                                 pattern="^\d+(\.\d{1,2})?$"
                                 digitOnly
                                 [decimal]="true"
                             />
                             <mat-icon matSuffix>attach_money</mat-icon>
-                            <mat-error
-                                *ngIf="
-                                    productForm
-                                        .get('PrecioUnitario')
-                                        .hasError('required')
-                                "
-                            >
-                                El precio unitario es requerido.
-                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="">
+                            <mat-label>Precio de venta</mat-label>
+                            <input
+                                matInput
+                                type="text"
+                                formControlName="PrecioVenta"
+                                pattern="^\d+(\.\d{1,2})?$"
+                                digitOnly
+                                [decimal]="true"
+                            />
+                            <mat-icon matSuffix>attach_money</mat-icon>
                         </mat-form-field>
                         
                         <mat-card-actions
