@@ -29,7 +29,6 @@ export class AuthService {
     }
 
     login(user: IUserLogin) {
-        console.log('user', user);
         return this.http.post<IToken>(`${this.API_URL}login/login`, user).pipe(
             map((token: IToken) => {
                 localStorage.setItem('Token', JSON.stringify(token));

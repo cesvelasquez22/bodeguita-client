@@ -15,24 +15,4 @@ export class SaleOrderService {
             `${environment.API_URL + environment.ordenesVentaPrefix}/Lista`
         );
     }
-
-    getCustomers() {
-        return this.http.get<ICustomer[]>(
-            `${environment.API_URL + environment.clientePrefix}/ClienteList`
-        );
-    }
-
-    getProducts() {
-        return this.http.get<IProduct[]>(
-            `${environment.API_URL + environment.productoPrefix}/ProductoList`
-        );
-    }
-
-    getMeasureUnits() {
-        return this.http.get<IMeasureUnit[]>(
-            `${
-                environment.API_URL + environment.unidadesMedidasPrefix
-            }/UnidadesMedidasList`
-        );
-    }
 }

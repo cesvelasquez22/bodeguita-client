@@ -1,28 +1,28 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { MatTableDataSource } from "@angular/material/table";
-import { MatPaginator } from "@angular/material/paginator";
-import { ISaleOrder } from "../../models/sale-order";
-import { Subject } from "rxjs";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { ISaleOrder } from '../../models/sale-order';
+import { Subject } from 'rxjs';
 
-import { SaleOrderService } from "../../services/sale-order.service";
-import { takeUntil } from "rxjs/operators";
+import { SaleOrderService } from '../../services/sale-order.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
-    selector: "app-sale-order-list",
-    templateUrl: "./sale-order-list.component.html",
-    styleUrls: ["./sale-order-list.component.scss"],
+    selector: 'app-sale-order-list',
+    templateUrl: './sale-order-list.component.html',
+    styleUrls: ['./sale-order-list.component.scss'],
 })
 export class SaleOrderListComponent implements OnInit {
     loading: boolean;
 
     displayedColumns: string[] = [
-        "posicion",
-        "idOrdenVenta",
-        "fechaCreacion",
-        "fechaSalida",
-        "idCliente",
-        "tipo",
-        "estado",
+        'posicion',
+        'idOrdenVenta',
+        'fechaCreacion',
+        'fechaSalida',
+        'idCliente',
+        'tipo',
+        'estado',
     ];
 
     dataSource = new MatTableDataSource<ISaleOrder>([]);

@@ -15,5 +15,6 @@ export const environment = {
     ordenesVentaPrefix: 'OrdenesVenta',
     proveedorPrefix: 'proveedor',
     clientePrefix: 'cliente',
+    maximosMinimosPrefix: 'maximosMinimos',
     unidadesMedidasPrefix: 'unidadesMedidas',
 };

@@ -10,6 +10,7 @@ import { IPurchaseOrderDetail } from '../../models/purchase-order.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { IProduct } from 'app/core/models/product.model';
 import { IMeasureUnit } from 'app/core/models/measureUnit.model';
+import { MainFacadeService } from 'app/core/services/main-facade/main-facade.service';
 
 @Component({
     selector: 'purchase-order-create',
@@ -60,7 +61,7 @@ export class PurchaseOrderCreateComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
-        private purchaseOrderService: PurchaseOrderService,
+        private mainFacadeService: MainFacadeService,
     ) {
         this.buildForm();
         this.purchaseOrderId = this.route.snapshot.paramMap.get('id');
@@ -98,9 +99,9 @@ export class PurchaseOrderCreateComponent implements OnInit {
             //
             this.viewModePurchaseOrder = 2;
             const purchaseOrderInfo$: Observable<[IProvider[], IProduct[], IMeasureUnit[]]> = combineLatest(
-                this.purchaseOrderService.getProviders(),
-                this.purchaseOrderService.getProducts(),
-                this.purchaseOrderService.getMeasureUnits(),
+                this.mainFacadeService.getProviders(),
+                this.mainFacadeService.getProducts(),
+                this.mainFacadeService.getMeasureUnits(),
             );
 
             purchaseOrderInfo$.pipe(takeUntil(this.unsubscribe$)).subscribe(data => {

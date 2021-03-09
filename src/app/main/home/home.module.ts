@@ -20,6 +20,8 @@ import { CommonModule } from '@angular/common';
 import { WidgetComponent } from './components/widget/widget.component';
 import { BestSalesComponent } from './components/best-sales/best-sales.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MaxMinProductsComponent } from './components/max-min-products/max-min-products.component';
+import { SharedModule } from 'app/shared/shared.module';
 
 export const routes: Routes = [
     {
@@ -29,10 +31,11 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomeComponent, WidgetComponent, BestSalesComponent],
+  declarations: [HomeComponent, WidgetComponent, BestSalesComponent, MaxMinProductsComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    SharedModule,
     
     // Material
     MatButtonModule,

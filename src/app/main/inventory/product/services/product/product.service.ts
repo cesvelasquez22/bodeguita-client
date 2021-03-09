@@ -12,28 +12,6 @@ export class ProductService {
   constructor(
       private http: HttpClient,
   ) { }
-
-  //
-  // ────────────────────────────────────────────── I ──────────
-  //   :::::: G E T : :  :   :    :     :        :          :
-  // ────────────────────────────────────────────────────────
-  //
-  getProducts() {
-      return this.http.get<IProduct[]>(`${environment.API_URL + environment.productoPrefix}/ProductoList`);
-  }
-
-  getBrands() {
-      return this.http.get<IBrand[]>(`${environment.API_URL + environment.marcaPrefix}/MarcaList`);
-  }
-
-  getCategories() {
-      return this.http.get<ICategory[]>(`${environment.API_URL + environment.categoriaPrefix}/CategoriaList`);
-  }
-
-  getDimensions() {
-    return this.http.get<IDimension[]>(`${environment.API_URL + environment.dimensionPrefix}/DimensionList`);
-}
-
   //
   // ──────────────────────────────────────────────── II ──────────
   //   :::::: P O S T : :  :   :    :     :        :          :

@@ -1,3 +1,4 @@
+<app-loading-overlay [isActive]="loading"></app-loading-overlay>
 <div
     id="dashboard-project"
     class="page-layout simple right-sidebar"
@@ -41,19 +42,20 @@
                 class="widget-group p-12"
                 fxLayout="row wrap"
                 fxFlex="100"
-                *fuseIfOnDom
+                *ngIf="widgetInfo$ | async as widgetInfo"
             >
                 <app-widget
                     fxFlex="25"
-                    *ngFor="let data of widgetData"
+                    *ngFor="let data of widgetData; index as i"
                     [title]="data.title"
-                    [statsNumber]="data.statsNumber"
+                    [statsNumber]="widgetInfo[i].length"
                     [numberFg]="data.numberFg"
                 ></app-widget>
             </div>
             <!-- / WIDGET GROUP -->
             <div class="p-12" fxLayout="row wrap" fxFlex="100" *fuseIfOnDom>
-                <app-best-sales style="width: 100%;"></app-best-sales>
+                <!-- <app-best-sales style="width: 100%;"></app-best-sales> -->
+                <app-max-min-products style="width: 100%;"></app-max-min-products>
             </div>
         </div>
         <!-- / CONTENT -->

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from 'app/core/models/product.model';
+import { MainFacadeService } from 'app/core/services/main-facade/main-facade.service';
 import { IzitoastAlertService } from 'app/core/utils/izitoast-alert.service';
 import { combineLatest, Observable } from 'rxjs';
 import { IBrand } from '../../models/brand.model';
@@ -36,6 +37,7 @@ export class ProductCreateComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private productService: ProductService,
+        private mainFacadeService: MainFacadeService,
         private izitoastAlertService: IzitoastAlertService,
     ) {
         this.buildForm();
@@ -95,9 +97,9 @@ export class ProductCreateComponent implements OnInit {
             // ─── CREATE ──────────────────────────────────────────────────────
             //
             this.productInfo$ = combineLatest(
-                this.productService.getBrands(),
-                this.productService.getCategories(),
-                this.productService.getDimensions()
+                this.mainFacadeService.getBrands(),
+                this.mainFacadeService.getCategories(),
+                this.mainFacadeService.getDimensions()
             );
             this.loading = false;
         }

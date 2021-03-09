@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MainFacadeService } from 'app/core/services/main-facade/main-facade.service';
 import { EPaymentMethod } from 'app/core/models/paymentMethod.enum';
 import { IProduct } from 'app/core/models/product.model';
 import { ICustomer } from 'app/core/models/customer.model';
@@ -8,7 +9,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ISaleOrderDetail } from '../../models/sale-order';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { SaleOrderService } from '../../services/sale-order.service';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -60,7 +60,7 @@ export class SaleOrderCreateComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
-        private saleOrderService: SaleOrderService
+        private mainFacadeService: MainFacadeService,
     ) {
         this.buildForm();
         this.saleOrderId = this.route.snapshot.paramMap.get('id');
@@ -102,9 +102,9 @@ export class SaleOrderCreateComponent implements OnInit {
             const saleOrderInfo$: Observable<
                 [ICustomer[], IProduct[], IMeasureUnit[]]
             > = combineLatest(
-                this.saleOrderService.getCustomers(),
-                this.saleOrderService.getProducts(),
-                this.saleOrderService.getMeasureUnits()
+                this.mainFacadeService.getCustomers(),
+                this.mainFacadeService.getProducts(),
+                this.mainFacadeService.getMeasureUnits()
             );
 
             saleOrderInfo$

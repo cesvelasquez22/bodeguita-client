@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MainFacadeService } from 'app/core/services/main-facade/main-facade.service';
 import { Subject } from 'rxjs';
 import { IProduct } from '../../../../../core/models/product.model';
 import { ProductService } from '../../services/product/product.service';
@@ -37,7 +38,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     private unsubscribe$: Subject<any> = new Subject();
 
     constructor(
-        private productService: ProductService,
+        private mainFacadeService: MainFacadeService,
         ) {}
 
     ngOnInit(): void {
@@ -51,7 +52,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     getProducts() {
         this.loading = true;
-        this.productService.getProducts().subscribe(
+        this.mainFacadeService.getProducts().subscribe(
             (productos) => {
                 if (productos && productos.length > 0) {
                     this.dataSource = new MatTableDataSource<IProduct>(
