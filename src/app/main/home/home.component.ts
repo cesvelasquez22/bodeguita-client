@@ -58,13 +58,15 @@ export class HomeComponent implements OnInit {
     }
 
     getWidgetsLength() {
+        this.loading = true;
         this.widgetInfo$ = combineLatest(
             this.mainFacadeService.getProducts(),
             this.mainFacadeService.getSalesOrders(),
             this.mainFacadeService.getCustomers(),
             this.maxMinProductService.getMaxMinProducts().pipe(
-                map(maxMinProduct => maxMinProduct.filter(product => product.cantidad === 0))
+                map(maxMinProduct => maxMinProduct.filter(product => product.Cantidad === 0))
             )
         );
+        this.loading = false;
     }
 }

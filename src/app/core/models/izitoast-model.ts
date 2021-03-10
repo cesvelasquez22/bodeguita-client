@@ -49,6 +49,22 @@ export const IIzitoastErrorDefault = {
     timeout: 3000,
 };
 
+export const IIzitoasWarningDefault = {
+    id: 'advertencia',
+    title: 'Aviso',
+    message: '',
+    messageColor: 'black',
+    color: 'black',
+    iconColor: 'black',
+    titleColor: 'black',
+    backgroundColor: 'rgb(234, 218, 0)',
+    theme: 'light',
+    progressBar: false,
+    position: 'topCenter',
+    displayMode: 2,
+    timeout: 3000,
+};
+
 //
 // ────────────────────────────────────────────────────────────────────────────── II ──────────
 //   :::::: C U S T O M I Z A B L E   M O D E L S : :  :   :    :     :        :          :

@@ -27,7 +27,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
         'IDCategoria',
         'PrecioCompra',
         'PrecioVenta',
-        // 'Estado',
+        'actions',
     ];
     dataSource = new MatTableDataSource<IProduct>([]);
     @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;

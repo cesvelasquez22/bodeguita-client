@@ -1,6 +1,7 @@
 export class IWarehousing {
-    idInventario: number;
-    idProducto: number;
-    cantidad: number;
-    estado: boolean;
+    IdInventario: number;
+    Idproducto: number;
+    Cantidad: number;
+    Estado: boolean;
+    edit?: boolean;
 }

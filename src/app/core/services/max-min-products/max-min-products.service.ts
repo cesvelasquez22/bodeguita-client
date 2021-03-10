@@ -29,7 +29,7 @@ export class MaxMinProductsService {
                 
                     const uniqArray = _.uniqBy(_.merge(data[0], data[1]), 'IdProducto');
                     uniqArray.forEach(product => {
-                        product.CantidadAproxA = product.cantidad - product.MinimoAceptable;
+                        product.CantidadAproxA = product.Cantidad - product.MinimoAceptable;
                     });
                     const orderArray = _.orderBy(uniqArray, ['cantidad', 'CantidadAproxA'], ['asc', 'asc']);
                     return orderArray;

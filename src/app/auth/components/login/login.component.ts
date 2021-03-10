@@ -80,7 +80,6 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
                 },
                 (err) => {
-                    console.log(err);
                     this.izitoastAlertService.CustomErrorAlert(
                         'Correo y/o contraseña incorrectos'
                     );

@@ -1,24 +1,16 @@
 import { Injectable } from '@angular/core';
 import izitoast from 'izitoast';
-import { BehaviorSubject } from 'rxjs';
 import {
     IIzitoasInfoDefault,
     IIzitoastErrorDefault,
     IIzitoastSuccessDefault,
+    IIzitoasWarningDefault,
 } from '../models/izitoast-model';
 
 @Injectable({
     providedIn: 'root',
 })
 export class IzitoastAlertService {
-    //
-    // ──────────────────────────────────────────────────────────────────────────────────────────────────────  ──────────
-    //   :::::: C U S T O M   A N N U L   I N V O I C E   O B S E R V A B L E : :  :   :    :     :        :          :
-    // ────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-    //
-    private annulmentReason = new BehaviorSubject<string>('');
-    public annulmentReason$ = this.annulmentReason.asObservable();
-
     //
     // ──────────────────────────────────────────────────────────────────────────────  ──────────
     //   :::::: C U S T O M I Z A B L E   A L E R T S : :  :   :    :     :        :          :
@@ -29,6 +21,7 @@ export class IzitoastAlertService {
         IIzitoastSuccessDefault,
         IIzitoasInfoDefault,
         IIzitoastErrorDefault,
+        IIzitoasWarningDefault,
     ];
 
     constructor() {}
@@ -52,5 +45,10 @@ export class IzitoastAlertService {
     CustomErrorAlert(message: string) {
         this.CustomAlertsArray[2].message = message;
         izitoast.error(this.CustomAlertsArray[2]);
+    }
+    
+    CustomWarningAlert(message: string) {
+        this.CustomAlertsArray[3].message = message;
+        izitoast.warning(this.CustomAlertsArray[3]);
     }
 }

@@ -110,7 +110,6 @@ export class SaleOrderCreateComponent implements OnInit {
             saleOrderInfo$
                 .pipe(takeUntil(this.unsubscribe$))
                 .subscribe((data) => {
-                    console.log(data);
                     if (data[0] && data[0].length > 0) {
                         this.customers = data[0];
                     }
