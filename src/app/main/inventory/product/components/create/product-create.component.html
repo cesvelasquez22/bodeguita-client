@@ -13,8 +13,6 @@
 
                 <form
                     [formGroup]="productForm"
-                    #form="ngForm"
-                    (ngSubmit)="onSubmit(form)"
                 >
                         <mat-form-field appearance="outline">
                             <mat-label>Marca</mat-label>
@@ -119,8 +117,8 @@
                             <button
                                 mat-raised-button
                                 color="primary"
+                                (click)="onSubmit(productForm.value)"
                                 [disabled]="productForm.invalid"
-                                type="submit"
                             >
                                 Guardar
                             </button>

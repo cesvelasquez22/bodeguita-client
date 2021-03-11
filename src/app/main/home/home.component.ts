@@ -4,8 +4,9 @@ import { IMaxMinProduct } from 'app/core/models/maxMinProduct.model';
 import { IProduct } from 'app/core/models/product.model';
 import { MainFacadeService } from 'app/core/services/main-facade/main-facade.service';
 import { MaxMinProductsService } from 'app/core/services/max-min-products/max-min-products.service';
+import { IzitoastAlertService } from 'app/core/utils/izitoast-alert.service';
 import { combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { debounceTime, map, tap } from 'rxjs/operators';
 import { ISaleOrder } from '../orders/sale-order/models/sale-order';
 import { IWidgetData } from './models/widget.data';
 @Component({
@@ -23,7 +24,8 @@ export class HomeComponent implements OnInit {
 
     constructor(
         private mainFacadeService: MainFacadeService,
-        private maxMinProductService: MaxMinProductsService
+        private maxMinProductService: MaxMinProductsService,
+        private izitoastAlertService: IzitoastAlertService,
     ) {
         setInterval(() => {
             this.dateNow = Date.now();
@@ -64,9 +66,19 @@ export class HomeComponent implements OnInit {
             this.mainFacadeService.getSalesOrders(),
             this.mainFacadeService.getCustomers(),
             this.maxMinProductService.getMaxMinProducts().pipe(
-                map(maxMinProduct => maxMinProduct.filter(product => product.Cantidad === 0))
+                map(maxMinProduct => maxMinProduct.filter((product: any) => product.cantidad === 0)),
             )
         );
+
+        this.widgetInfo$.subscribe(data => {
+            if (data[3] && data[3].length > 0) {
+                data[3].forEach((product, index) => {
+                    setTimeout(() => {
+                      this.izitoastAlertService.MaxMinAlerts(product.IDProducto);
+                    }, index * 5000);
+                  });
+            }
+        })
         this.loading = false;
     }
 }

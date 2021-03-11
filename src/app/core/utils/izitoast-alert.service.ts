@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import izitoast from 'izitoast';
 import {
     IIzitoasInfoDefault,
@@ -24,7 +25,9 @@ export class IzitoastAlertService {
         IIzitoasWarningDefault,
     ];
 
-    constructor() {}
+    constructor(
+        private router: Router,
+    ) {}
 
     //
     // ────────────────────────────────────────────────────────────────────────────────  ──────────
@@ -50,5 +53,35 @@ export class IzitoastAlertService {
     CustomWarningAlert(message: string) {
         this.CustomAlertsArray[3].message = message;
         izitoast.warning(this.CustomAlertsArray[3]);
+    }
+
+    MaxMinAlerts(product: any) {
+        izitoast.show({
+            theme: 'dark',
+            icon: 'notification',
+            title: 'Productos',
+            message: `${product} agotado`,
+            position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+            progressBarColor: 'rgb(0, 255, 184)',
+            buttons: [
+                ['<button>Ir a tabla</button>', (instance, toast) => {
+                    this.router.navigate(['/admin/home']);
+                }, true], // true to focus
+                ['<button>Cerrar</button>', (instance, toast) => {
+                    instance.hide({
+                        transitionOut: 'fadeOutUp',
+                        onClosing: (_instance, _toast, closedBy) => {
+                            console.log('closedBy: ' + closedBy); // The return will be: 'closedBy: buttonName'
+                        }
+                    }, toast, 'buttonName');
+                }] as any
+            ],
+            onOpening: (instance, toast) => {
+                console.log('callback abriu!');
+            },
+            onClosing: (instance, toast, closedBy) => {
+                console.log('closedBy: ' + closedBy); // tells if it was closed by 'drag' or 'button'
+            }
+        });
     }
 }

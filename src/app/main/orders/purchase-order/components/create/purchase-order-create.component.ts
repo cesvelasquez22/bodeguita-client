@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IProvider } from 'app/core/models/provider.model';
 import { EPaymentMethod } from 'app/core/models/paymentMethod.enum';
 import { Observable, combineLatest, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { PurchaseOrderService } from '../../services/purchase-order/purchase-order.service';
-import { IPurchaseOrderDetail } from '../../models/purchase-order.model';
+import { IPurchaseOrder, IPurchaseOrderDetail } from '../../models/purchase-order.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { IProduct } from 'app/core/models/product.model';
 import { IMeasureUnit } from 'app/core/models/measureUnit.model';
 import { MainFacadeService } from 'app/core/services/main-facade/main-facade.service';
+import { IzitoastAlertService } from 'app/core/utils/izitoast-alert.service';
 
 @Component({
     selector: 'purchase-order-create',
@@ -62,6 +63,9 @@ export class PurchaseOrderCreateComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private mainFacadeService: MainFacadeService,
+        private purchaseOrderService: PurchaseOrderService,
+        private izitoastAlertService: IzitoastAlertService,
+        private router: Router,
     ) {
         this.buildForm();
         this.purchaseOrderId = this.route.snapshot.paramMap.get('id');
@@ -208,7 +212,8 @@ export class PurchaseOrderCreateComponent implements OnInit {
             .reduce((acc, value) => acc + value, 0);
         const total = sumSubtotal + sumTax;
         this.purchaseOrderForm.controls.SubTotal.setValue(sumSubtotal);
-        this.purchaseOrderForm.controls.Impuesto.setValue(sumTax);
+        this.purchaseOrderForm.controls.Impuesto.setValue(sumTax)
+        ;
         this.purchaseOrderForm.controls.Total.setValue(total);
     }
 
@@ -229,6 +234,17 @@ export class PurchaseOrderCreateComponent implements OnInit {
     }
 
     savePurchaseOrder() {
-        console.log(this.purchaseOrderForm.value);
+        this.loading = true;
+        if (this.purchaseOrderForm.valid) {
+            const newPurchaseOrder: IPurchaseOrder = this.purchaseOrderForm.value
+            this.purchaseOrderService.createPurchaseOrder(newPurchaseOrder).subscribe(response => {
+                this.izitoastAlertService.CustomSuccessAlert(response);
+                this.loading = false;
+                this.router.navigate(['/admin/orders/purchase-orders']);
+            }, (err) => {
+                this.izitoastAlertService.CustomErrorAlert('Hubo un error intentando crear la orden de compra');
+                this.loading = false;
+            });
+        }
     }
 }

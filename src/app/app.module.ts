@@ -26,6 +26,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
         BrowserAnimationsModule,
         HttpClientModule,
         FlexLayoutModule,
+        RouterModule,
 
         // Material moment date module
         MatMomentDateModule,

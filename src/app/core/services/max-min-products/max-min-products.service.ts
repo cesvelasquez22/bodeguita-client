@@ -27,10 +27,11 @@ export class MaxMinProductsService {
             map(data => {
                 if (data && data[0] && data[1]) {
                 
-                    const uniqArray = _.uniqBy(_.merge(data[0], data[1]), 'IdProducto');
-                    uniqArray.forEach(product => {
-                        product.CantidadAproxA = product.Cantidad - product.MinimoAceptable;
+                    const uniqArray = _.uniqBy(_.merge(data[0], data[1]), 'IDProducto');
+                    uniqArray.forEach((product: any) => {
+                        product.CantidadAproxA = product.cantidad - product.MinimoAceptable;
                     });
+                    console.log(uniqArray);
                     const orderArray = _.orderBy(uniqArray, ['cantidad', 'CantidadAproxA'], ['asc', 'asc']);
                     return orderArray;
                 }
