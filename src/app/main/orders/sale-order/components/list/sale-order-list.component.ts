@@ -47,7 +47,6 @@ export class SaleOrderListComponent implements OnInit {
             .subscribe(
                 (saleOrders) => {
                     if (saleOrders && saleOrders.length > 0) {
-                        console.log(saleOrders);
                         this.dataSource = new MatTableDataSource<ISaleOrder>(
                             saleOrders
                         );

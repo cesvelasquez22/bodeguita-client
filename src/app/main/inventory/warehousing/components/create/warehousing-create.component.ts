@@ -44,7 +44,6 @@ export class WarehousingCreateComponent implements OnInit {
         this.title = 'Editar';
         const productInventory: IWarehousing = this.data.editProductInventory;
         this.warehousingService.getProductInventory(productInventory.IdInventario).subscribe(product => {
-            console.log(product);
             if (product && product !== null) {
                 this.setWarehousingInfo(product);
             }
