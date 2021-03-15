@@ -6,6 +6,8 @@ import { Subject } from 'rxjs';
 
 import { SaleOrderService } from '../../services/sale-order.service';
 import { takeUntil } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { SaleOrderState } from 'app/core/enums/saleOrderState.enum';
 
 @Component({
     selector: 'app-sale-order-list',
@@ -17,22 +19,24 @@ export class SaleOrderListComponent implements OnInit {
 
     displayedColumns: string[] = [
         'posicion',
-        'idOrdenVenta',
         'fechaCreacion',
         'fechaSalida',
         'idCliente',
         'tipo',
-        'estado',
+        'actions',
     ];
 
     dataSource = new MatTableDataSource<ISaleOrder>([]);
     @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+    filterBy = new FormControl('Proceso');
+    status = SaleOrderState;
 
     private unsubscribe$: Subject<any> = new Subject();
 
     constructor(private saleOrderService: SaleOrderService) {}
     ngOnInit(): void {
         this.getSalesOrders();
+        this.onChangeStates();
     }
 
     getSalesOrders() {
@@ -43,14 +47,24 @@ export class SaleOrderListComponent implements OnInit {
             .subscribe(
                 (saleOrders) => {
                     if (saleOrders && saleOrders.length > 0) {
+                        console.log(saleOrders);
                         this.dataSource = new MatTableDataSource<ISaleOrder>(
                             saleOrders
                         );
                         this.dataSource.paginator = this.paginator;
+                        this.dataSource.filter = this.filterBy.value;
                     }
                     this.loading = false;
                 },
                 (err) => (this.loading = false)
             );
+    }
+
+    onChangeStates() {
+        this.filterBy.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe(changes => {
+            if (changes && changes !== null) {
+                this.dataSource.filter = changes;
+            }
+        })
     }
 }

@@ -462,7 +462,9 @@ export class PurchaseOrderCreateComponent implements OnInit, OnDestroy {
     }
 
     nextOrderState(): string {
-        this.nextState = this.states[this.IdestadoOrdenCompra].key;
-        return this.states[this.IdestadoOrdenCompra].label;
+        if (this.IdestadoOrdenCompra && this.IdestadoOrdenCompra !== 5) {
+            this.nextState = this.states[this.IdestadoOrdenCompra].key;
+            return this.states[this.IdestadoOrdenCompra].label;
+        }
     }
 }

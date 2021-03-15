@@ -28,14 +28,6 @@
                         </td>
                     </ng-container>
 
-                    <!-- Position Column -->
-                    <ng-container matColumnDef="idOrdenVenta">
-                        <th mat-header-cell *matHeaderCellDef>No. de Orden</th>
-                        <td mat-cell *matCellDef="let element">
-                            {{ element.idOrdenVenta }}
-                        </td>
-                    </ng-container>
-
                     <!-- Brand Column -->
                     <ng-container matColumnDef="idCliente">
                         <th mat-header-cell *matHeaderCellDef>Cliente</th>
@@ -71,13 +63,24 @@
                         </td>
                     </ng-container>
 
-                    <!-- Unit price Column -->
-                    <ng-container matColumnDef="estado">
-                        <th mat-header-cell *matHeaderCellDef>Estado</th>
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef>Acciones</th>
                         <td mat-cell *matCellDef="let element">
-                            {{ element.estado }}
+                            <button
+                                mat-icon-button
+                                color="accent"
+                                [routerLink]="element.idOrdenVenta"
+                            >
+                                <mat-icon>search</mat-icon>
+                            </button>
                         </td>
                     </ng-container>
+
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No se encontraron órdenes</td>
+                    </tr>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr
@@ -85,12 +88,48 @@
                         *matRowDef="let row; columns: displayedColumns"
                     ></tr>
                 </table>
-                <mat-paginator
-                    fxLayoutAlign="end center"
-                    style="width: 100%"
-                    [pageSizeOptions]="[10, 20]"
-                    showFirstLastButtons
-                ></mat-paginator>
+                <!-- CUSTOM TOOLBAR FILTER -->
+                <mat-toolbar>
+                    <mat-toolbar-row style="padding: 0%">
+                        <div
+                            fxLayout="row"
+                            fxLayoutAlign="start"
+                            fxFlex="100"
+                            style="background-color: white"
+                        >
+                            <div
+                                fxLayout="row"
+                                fxFlex
+                                fxLayoutAlign="start center"
+                            >
+                                <div class="filter-by">
+                                    <mat-label style="margin: 0 10px"
+                                        >Filtrar por:</mat-label
+                                    >
+                                    <mat-form-field appearance="">
+                                        <mat-select [formControl]="filterBy">
+                                            <mat-option
+                                                *ngFor="
+                                                    let state of status
+                                                        | keyvalue
+                                                "
+                                                [value]="state.key"
+                                            >
+                                                {{ state.value }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <mat-paginator
+                                fxLayoutAlign="end center"
+                                style="width: 100%"
+                                [pageSizeOptions]="[10, 20]"
+                                showFirstLastButtons
+                            ></mat-paginator>
+                        </div>
+                    </mat-toolbar-row>
+                </mat-toolbar>
             </div>
         </div>
     </div>

@@ -54,19 +54,6 @@
                                             ></span
                                         >
                                     </div>
-                                    <!-- <div
-                                        fxLayout="column"
-                                        fxLayoutAlign="center end"
-                                        fxFlex="50"
-                                        *ngIf="viewModePurchaseOrder === 2"
-                                    >
-                                        <button
-                                            mat-mini-fab
-                                            (click)="addInvoiceCustomerDialog()"
-                                        >
-                                            <mat-icon>person_add</mat-icon>
-                                        </button>
-                                    </div> -->
                                 </div>
                                 <div fxLayout="row">
                                     <mat-form-field>
@@ -75,13 +62,6 @@
                                             formControlName="Idproveedor"
                                             #providerSelect
                                         >
-                                            <!-- <mat-option #customerOption>
-                                                <ngx-mat-select-search
-                                                    [formControl]="filterSelect"
-                                                    placeholderLabel="Busqueda"
-                                                    noEntriesFoundLabel="No hay registros disponibles"
-                                                ></ngx-mat-select-search>
-                                            </mat-option> -->
                                             <mat-option
                                                 *ngFor="
                                                     let provider of providers
@@ -146,25 +126,6 @@
                                     >{{ purchaseOrderProvider.Telefono }}
                                 </div>
                             </div>
-                            <!--
-                          -- EDIT
-                          -->
-                            <!-- <div
-                                *ngIf="
-                                    invoiceDetail &&
-                                    invoiceDetail.customer &&
-                                    viewModePurchaseOrder === 1
-                                "
-                            >
-                                <strong>Dirección: </strong
-                                >{{
-                                    purchaseOrderProvider.Direccion
-                                }}
-                                <strong>Telefono: </strong
-                                >{{
-                                    purchaseOrderProvider.Telefono
-                                }}
-                            </div> -->
                         </div>
                     </div>
                     <!--
@@ -180,7 +141,6 @@
                                 <!--
                                   -- CREATE
                                   -->
-                                <!-- <div *ngIf="viewModePurchaseOrder === 2"> -->
                                 <span class="mat-subheading-2"
                                     ><strong>Forma de pago</strong></span
                                 >
@@ -208,7 +168,6 @@
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
-                                <!-- </div> -->
                             </div>
                         </div>
                         <div
@@ -220,7 +179,6 @@
                                 <!--
                               -- CREATE
                               -->
-                                <!-- <div *ngIf="viewModePurchaseOrder === 2"> -->
                                 <span class="mat-subheading-2"
                                     ><strong
                                         >Fecha expectativa de entrega: </strong
@@ -262,15 +220,6 @@
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
-                                <!-- <div
-                                    fxLayout="row"
-                                    *ngIf="viewModePurchaseOrder === 1 && purchaseOrderForm.get('FechaEspectativa').value as FechaEspectativa"
-                                >
-                                    <span class="mat-subheading-2">{{
-                                        FechaEspectativa | date: "dd/MM/yyyy"
-                                    }}</span>
-                                </div> -->
-                                <!-- </div> -->
                             </div>
                         </div>
                     </div>
@@ -592,7 +541,7 @@
                             Guardar
                         </button>
                         <button
-                            *ngIf="viewModePurchaseOrder === 1 && IdestadoOrdenCompra !== 4"
+                            *ngIf="viewModePurchaseOrder === 1 && IdestadoOrdenCompra !== 4 && IdestadoOrdenCompra !== 5"
                             mat-raised-button
                             color="warn"
                             style="color: white"
@@ -603,7 +552,7 @@
                             Anular
                         </button>
                         <button
-                            *ngIf="viewModePurchaseOrder === 1 && nextOrderState() !== 'Anulada' && IdestadoOrdenCompra !== 4"
+                            *ngIf="viewModePurchaseOrder === 1 && IdestadoOrdenCompra !== 4 && IdestadoOrdenCompra !== 5"
                             mat-raised-button
                             color="primary"
                             [disabled]="purchaseOrderForm.invalid"

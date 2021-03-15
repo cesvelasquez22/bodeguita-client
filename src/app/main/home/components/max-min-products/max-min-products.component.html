@@ -36,8 +36,8 @@
         <ng-container matColumnDef="cantidad">
             <th mat-header-cell *matHeaderCellDef>Existencias</th>
             <td mat-cell *matCellDef="let element">
-                <p class="status text-truncate h6 p-4" style="width: 50%; text-align: center;" [ngClass]="{ 'red-900' : element.cantidad === 0}">
-                    {{ element.cantidad === 0 ? 'Agotado' : element.cantidad }}
+                <p class="status text-truncate h6 p-4" style="width: 50%; text-align: center;" [ngClass]="{ 'red-900' : element.cantidad <= 0}">
+                    {{ element.cantidad <= 0 ? 'Agotado' : element.cantidad }}
                 </p>
             </td>
         </ng-container>

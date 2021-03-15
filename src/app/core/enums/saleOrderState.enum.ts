@@ -1,5 +1,5 @@
 export enum SaleOrderState {
-    EnProceso = 'En proceso',
+    Proceso = 'En proceso',
     Entregada = 'Entregada',
     Anulada = 'Anulada'
 }

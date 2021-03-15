@@ -1,23 +1,24 @@
 export class ISaleOrder {
-    idOrdenVenta: number;
-    fechaCreacion: Date;
-    fechaSalida: Date;
-    idCliente: number;
-    tipo: number;
-    estado: ISaleOrderState;
-    total: number;
-    detalleOrdenVenta: ISaleOrderDetail;
+    IdordenVenta: number;
+    FechaCreacion: Date;
+    FechaSalida: Date;
+    Idcliente: number;
+    Tipo: number;
+    IdestadoOrdenVenta: number;
+    SubTotal: number;
+    IdDescuento: number;
+    MontoDescuento: number;
+    Impuesto: number;
+    Total: number;
+    DetalleOrdenVenta: ISaleOrderDetail[];
 }
 
 export class ISaleOrderDetail {
-    IDOrdenVenta: number;
-    IDProducto: number;
-    IDUnidadMedida: number;
+    IdordenVenta: number;
+    Idproducto: number;
+    IdunidadMedida: number;
     Cantidad: number;
+    PrecioVenta: number;
     TotalUnidadVenta: number;
 }
 
-export class ISaleOrderState {
-    IdEstadoOrdenVenta: number;
-    Nombre: string;
-}
