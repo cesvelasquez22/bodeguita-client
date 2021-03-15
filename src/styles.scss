@@ -36,3 +36,21 @@ app-login #login{
 .center-align {
     text-align: center;
 }
+
+.filter-by {
+    display: flex;
+    align-items: baseline;
+    margin-right: 8px;
+    font-family: Muli, Helvetica Neue, Arial, sans-serif;
+    font-size: 1.5rem;
+    color: rgba(0, 0, 0, 0.54);
+    flex-direction: row;
+    justify-content: start;
+    
+    mat-label {
+        margin: 0 10px;
+    }
+    mat-form-field {
+        font-size: 1.3rem;
+    }
+}

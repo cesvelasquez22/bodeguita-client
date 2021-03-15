@@ -14,11 +14,21 @@ export class PurchaseOrderService {
         );
     }
 
+    getPurchaseOrderDetail(idOrdenCompra: any) {
+        return this.http.get<IPurchaseOrder>(
+            `${ environment.API_URL + environment.ordenesCompraPrefix }/OrdenCompra/${ idOrdenCompra }`
+        );
+    }
+
     createPurchaseOrder(purchaseOrder: IPurchaseOrder) {
         return this.http.post(`${ environment.API_URL + environment.ordenesCompraPrefix }/AddOrdenCompra`, purchaseOrder, { headers: headers, responseType: 'text' });
     }
 
     updatePurchaseOrder(purchaseOrder: IPurchaseOrder) {
-        return this.http.post(`${ environment.API_URL + environment.ordenesCompraPrefix }/UpdateOrdenCompra`, purchaseOrder, { headers: headers, responseType: 'text' });
+        return this.http.put(`${ environment.API_URL + environment.ordenesCompraPrefix }/UpdateOrdenCompra`, purchaseOrder, { headers: headers, responseType: 'text' });
+    }
+
+    annulPurchaseOrder(purchaseOrder: IPurchaseOrder) {
+        return this.http.put(`${ environment.API_URL + environment.ordenesCompraPrefix }/AnularOrdenCompra`, purchaseOrder, { headers: headers, responseType: 'text' });
     }
 }

@@ -69,7 +69,6 @@ export class WarehousingCreateComponent implements OnInit {
   setWarehousingInfo(productInventory: any) {
     this.form.controls.IdInventario.setValue(productInventory.Idinventario);
     this.form.controls.Idproducto.setValue(productInventory.Idproducto);
-    this.form.controls.Idproducto.disable();
     this.form.controls.Cantidad.setValue(productInventory.Cantidad);
     this.form.controls.Estado.setValue(productInventory.Estado);
   }

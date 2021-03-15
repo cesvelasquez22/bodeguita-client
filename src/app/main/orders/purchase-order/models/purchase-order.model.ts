@@ -1,23 +1,23 @@
 export class IPurchaseOrder {
-    idOrdenCompra: number;
-    fechaCreacion: Date;
-    fechaEspectativa: Date;
-    idProveedor: number;
-    tipo: string;
-    detalleOrdenCompra: IPurchaseOrderDetail[];
-    userCreatedId: number;
-    estado: IPurchaseOrderState;
+    IdordenCompra: number;
+    FechaCreacion: Date;
+    FechaEspectativa: Date;
+    Idproveedor: number;
+    Tipo: string;
+    DetalleOrdenCompra: IPurchaseOrderDetail[];
+    UserCreatedId: number;
+    Impuesto: number;
+    SubTotal: number;
+    Total: number;
+    IdestadoOrdenCompra: number;
 }
 
 export class IPurchaseOrderDetail {
-    IDOrdenCompra: number;
-    IDProducto: number;
-    IDUnidadMedida: number;
+    IdordenCompra: number;
+    Idproducto: number;
+    IdunidadMedida: number;
     Cantidad: number;
+    PrecioCompra: number;
     TotalUnidadCompra: number;
 }
 
-export class IPurchaseOrderState {
-    IdEstadoOrdenCompra: number;
-    Nombre: string;
-}

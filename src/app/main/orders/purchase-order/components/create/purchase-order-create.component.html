@@ -3,7 +3,7 @@
     <app-title-header
         [icon]="'assistant'"
         [section]="'Órdenes de compra'"
-        [title]="'Nueva orden de compra'"
+        [title]="'Detalle orden de compra'"
     ></app-title-header>
 
     <!--
@@ -69,9 +69,7 @@
                                     </div> -->
                                 </div>
                                 <div fxLayout="row">
-                                    <mat-form-field
-                                        *ngIf="viewModePurchaseOrder === 2"
-                                    >
+                                    <mat-form-field>
                                         <mat-label>Proveedor</mat-label>
                                         <mat-select
                                             formControlName="Idproveedor"
@@ -182,36 +180,35 @@
                                 <!--
                                   -- CREATE
                                   -->
-                                <div *ngIf="viewModePurchaseOrder === 2">
-                                    <span class="mat-subheading-2"
-                                        ><strong>Forma de pago</strong></span
-                                    >
-                                    <div fxLayout="row">
-                                        <mat-form-field>
-                                            <mat-label>Pago</mat-label>
-                                            <mat-select formControlName="Tipo">
-                                                <mat-option
-                                                    *ngFor="
-                                                        let payment of paymentMethod
-                                                            | keyvalue
-                                                    "
-                                                    [value]="payment.value"
-                                                >
-                                                    {{ payment.value }}
-                                                </mat-option>
-                                            </mat-select>
-                                            <mat-error
-                                                *ngIf="
-                                                    purchaseOrderForm.get(
-                                                        'Tipo'
-                                                    ).errors
+                                <!-- <div *ngIf="viewModePurchaseOrder === 2"> -->
+                                <span class="mat-subheading-2"
+                                    ><strong>Forma de pago</strong></span
+                                >
+                                <div fxLayout="row">
+                                    <mat-form-field>
+                                        <mat-label>Pago</mat-label>
+                                        <mat-select formControlName="Tipo">
+                                            <mat-option
+                                                *ngFor="
+                                                    let payment of paymentMethod
+                                                        | keyvalue
                                                 "
+                                                [value]="payment.value"
                                             >
-                                                La forma de pago es requerida
-                                            </mat-error>
-                                        </mat-form-field>
-                                    </div>
+                                                {{ payment.value }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error
+                                            *ngIf="
+                                                purchaseOrderForm.get('Tipo')
+                                                    .errors
+                                            "
+                                        >
+                                            La forma de pago es requerida
+                                        </mat-error>
+                                    </mat-form-field>
                                 </div>
+                                <!-- </div> -->
                             </div>
                         </div>
                         <div
@@ -223,44 +220,57 @@
                                 <!--
                               -- CREATE
                               -->
-                                <div *ngIf="viewModePurchaseOrder === 2">
-                                    <span class="mat-subheading-2"
-                                        ><strong
-                                            >Fecha expectativa de
-                                            entrega</strong
-                                        ></span
-                                    >
-                                    <div fxLayout="row">
-                                        <mat-form-field>
-                                            <input
-                                                matInput
-                                                [matDatepicker]="expectDate"
-                                                (dateInput)="
-                                                    inputExpectDate($event)
-                                                "
-                                                readonly
-                                                formControlName="FechaEspectativa"
-                                            />
-                                            <mat-datepicker-toggle
-                                                matSuffix
-                                                [for]="expectDate"
-                                            ></mat-datepicker-toggle>
-                                            <mat-datepicker
-                                                #expectDate
-                                            ></mat-datepicker>
-                                            <mat-error
-                                                *ngIf="
-                                                    purchaseOrderForm.get(
-                                                        'FechaEspectativa'
-                                                    ).errors
-                                                "
-                                            >
-                                                La fecha expectativa es
-                                                requerida
-                                            </mat-error>
-                                        </mat-form-field>
-                                    </div>
+                                <!-- <div *ngIf="viewModePurchaseOrder === 2"> -->
+                                <span class="mat-subheading-2"
+                                    ><strong
+                                        >Fecha expectativa de entrega: </strong
+                                    > {{
+                                        viewModePurchaseOrder === 1 && purchaseOrderForm.get('FechaEspectativa').value
+                                        ? (purchaseOrderForm.get('FechaEspectativa').value | date: "dd/MM/yyyy")
+                                        : ""
+                                    }} </span
+                                >
+                                <div
+                                    fxLayout="row"
+                                    *ngIf="viewModePurchaseOrder === 2"
+                                >
+                                    <mat-form-field>
+                                        <input
+                                            matInput
+                                            [matDatepicker]="expectDate"
+                                            (dateInput)="
+                                                inputExpectDate($event)
+                                            "
+                                            readonly
+                                            formControlName="FechaEspectativa"
+                                        />
+                                        <mat-datepicker-toggle
+                                            matSuffix
+                                            [for]="expectDate"
+                                        ></mat-datepicker-toggle>
+                                        <mat-datepicker
+                                            #expectDate
+                                        ></mat-datepicker>
+                                        <mat-error
+                                            *ngIf="
+                                                purchaseOrderForm.get(
+                                                    'FechaEspectativa'
+                                                ).errors
+                                            "
+                                        >
+                                            La fecha expectativa es requerida
+                                        </mat-error>
+                                    </mat-form-field>
                                 </div>
+                                <!-- <div
+                                    fxLayout="row"
+                                    *ngIf="viewModePurchaseOrder === 1 && purchaseOrderForm.get('FechaEspectativa').value as FechaEspectativa"
+                                >
+                                    <span class="mat-subheading-2">{{
+                                        FechaEspectativa | date: "dd/MM/yyyy"
+                                    }}</span>
+                                </div> -->
+                                <!-- </div> -->
                             </div>
                         </div>
                     </div>
@@ -270,7 +280,7 @@
                     <div fxLayout="column" class="mx-12 mt-12">
                         <table
                             mat-table
-                            formArrayName="detalleOrdenCompra"
+                            formArrayName="DetalleOrdenCompra"
                             [dataSource]="dataSource"
                         >
                             <!-- Position Column -->
@@ -285,7 +295,7 @@
                             </ng-container>
 
                             <!-- Product Column -->
-                            <ng-container matColumnDef="IDProducto">
+                            <ng-container matColumnDef="Idproducto">
                                 <th mat-header-cell *matHeaderCellDef>
                                     Producto
                                 </th>
@@ -294,12 +304,10 @@
                                     *matCellDef="let element; index as i"
                                     [formGroupName]="i"
                                 >
-                                    <mat-form-field
-                                        *ngIf="viewModePurchaseOrder === 2"
-                                    >
+                                    <mat-form-field>
                                         <mat-label>Producto</mat-label>
                                         <mat-select
-                                            formControlName="IDProducto"
+                                            formControlName="Idproducto"
                                             (selectionChange)="
                                                 calculateDetailList(i)
                                             "
@@ -320,7 +328,7 @@
                             </ng-container>
 
                             <!-- Unidad de medida Column -->
-                            <ng-container matColumnDef="IDUnidadMedida">
+                            <ng-container matColumnDef="IdunidadMedida">
                                 <th mat-header-cell *matHeaderCellDef>
                                     Unidad de medida
                                 </th>
@@ -329,12 +337,10 @@
                                     *matCellDef="let element; index as i"
                                     [formGroupName]="i"
                                 >
-                                    <mat-form-field
-                                        *ngIf="viewModePurchaseOrder === 2"
-                                    >
+                                    <mat-form-field>
                                         <mat-label>Unidad de medida</mat-label>
                                         <mat-select
-                                            formControlName="IDUnidadMedida"
+                                            formControlName="IdunidadMedida"
                                             (selectionChange)="
                                                 calculateDetailList(i)
                                             "
@@ -365,8 +371,8 @@
                                     [formGroupName]="i"
                                 >
                                     L.{{
-                                        (productSelected
-                                            ? productSelected.PrecioCompra
+                                        (details[i].PrecioCompra
+                                            ? details[i].PrecioCompra
                                             : 0
                                         ) | number: "0.2-2"
                                     }}
@@ -417,8 +423,7 @@
                                 >
                                     L.
                                     {{
-                                        (viewModePurchaseOrder === 2 &&
-                                        details[i].TotalUnidadCompra
+                                        (details[i].TotalUnidadCompra
                                             ? details[i].TotalUnidadCompra
                                             : 0
                                         ) | number: "0.2-2"
@@ -585,6 +590,26 @@
                             (click)="savePurchaseOrder()"
                         >
                             Guardar
+                        </button>
+                        <button
+                            *ngIf="viewModePurchaseOrder === 1 && IdestadoOrdenCompra !== 4"
+                            mat-raised-button
+                            color="warn"
+                            style="color: white"
+                            [disabled]="purchaseOrderForm.invalid"
+                            (click)="annulPurchaseOrder()"
+                        >
+                            <mat-icon>cancel</mat-icon>
+                            Anular
+                        </button>
+                        <button
+                            *ngIf="viewModePurchaseOrder === 1 && nextOrderState() !== 'Anulada' && IdestadoOrdenCompra !== 4"
+                            mat-raised-button
+                            color="primary"
+                            [disabled]="purchaseOrderForm.invalid"
+                            (click)="savePurchaseOrder()"
+                        >
+                            Emitir orden a {{ nextState }}
                         </button>
                     </mat-card-actions>
                 </form>
