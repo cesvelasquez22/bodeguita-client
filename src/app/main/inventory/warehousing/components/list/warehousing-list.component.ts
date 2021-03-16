@@ -81,7 +81,7 @@ export class WarehousingListComponent implements OnInit {
                   this.addProductInventory(productInventory);
                 }
               }
-        })
+        });
     }
 
     addProductInventory(productInventory: IWarehousing) {

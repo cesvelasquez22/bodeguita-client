@@ -33,7 +33,6 @@ const routes: Routes = [
             },
             {
                 path: 'home',
-                
                 loadChildren: () =>
                     import('./main/home/home.module').then((m) => m.HomeModule),
         
@@ -47,6 +46,11 @@ const routes: Routes = [
                 path: 'orders',
                 loadChildren: () =>
                     import('./main/orders/order.module').then((m) => m.OrderModule),
+            },
+            {
+                path: 'admin-users',
+                loadChildren: () =>
+                    import('./main/admin-users/admin-users.module').then((m) => m.AdminUsersModule),
             },
         ]
     },

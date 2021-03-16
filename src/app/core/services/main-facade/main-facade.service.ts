@@ -4,6 +4,7 @@ import { ICustomer } from 'app/core/models/customer.model';
 import { IMeasureUnit } from 'app/core/models/measureUnit.model';
 import { IProduct } from 'app/core/models/product.model';
 import { IProvider } from 'app/core/models/provider.model';
+import { IRole } from 'app/core/models/role.model';
 import { IWarehousing } from 'app/core/models/warehousing.model';
 import { IBrand } from 'app/main/inventory/product/models/brand.model';
 import { ICategory } from 'app/main/inventory/product/models/category.model';
@@ -71,5 +72,9 @@ export class MainFacadeService {
         return this.http.get<ISaleOrder[]>(
             `${environment.API_URL + environment.ordenesVentaPrefix}/Lista`
         );
+    }
+
+    getRoles() {
+        return this.http.get<IRole[]>(`${ environment.API_URL + environment.rolesPrefix }/RoleList`);
     }
 }

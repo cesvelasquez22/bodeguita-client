@@ -46,7 +46,7 @@ export const navigation: FuseNavigation[] = [
                 title    : 'Usuarios',
                 type     : 'item',
                 icon     : 'person_pin',
-                url      : 'users',
+                url      : 'admin-users',
             },
             {
                 id       : 'customers',

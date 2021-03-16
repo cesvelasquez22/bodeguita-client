@@ -5,7 +5,7 @@
             <mat-label>Producto</mat-label>
             <mat-select formControlName="Idproducto" #providerSelect>
                 <mat-option
-                    *ngFor="let product of products$ | async"
+                    *ngFor="let product of products"
                     [value]="product.IDProducto"
                 >
                     {{ product.IDMarca + " " + product.IDDimension }}

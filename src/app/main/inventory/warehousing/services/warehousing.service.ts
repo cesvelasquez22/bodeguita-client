@@ -11,8 +11,8 @@ export class WarehousingService {
 
     constructor(private http: HttpClient) {}
 
-    getProductInventory(productInventoryId: any) {
-        return this.http.get<IWarehousing>(`${environment.API_URL + environment.inventarioPrefix}/inventario/${productInventoryId}`);
+    getProductInventory(productInventoryId: number) {
+        return this.http.get<IWarehousing>(`${environment.API_URL + environment.inventarioPrefix}/Inventario/${productInventoryId}`);
     }
 
     createProductInventory(productInventory: IWarehousing) {

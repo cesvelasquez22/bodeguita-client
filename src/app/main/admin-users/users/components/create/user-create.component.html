@@ -1,0 +1,97 @@
+<app-loading-overlay [isActive]="loading"></app-loading-overlay>
+<div class="page-layout simple fullwidth" fxLayout="column">
+    <app-title-header
+        [icon]="'assistant'"
+        [section]="'Productos'"
+        [title]="'Nuevo producto'"
+    ></app-title-header>
+
+    <div fxLayout="row" fxLayout.xs="column">
+        <div fxLayout="column" fxFlex="40" class="m-36">
+            <mat-card>
+                <mat-card-title> Datos generales </mat-card-title>
+
+                <form [formGroup]="userForm">
+                    <mat-form-field appearance="outline" class="">
+                        <mat-label>Nombre completo</mat-label>
+                        <input matInput type="text" formControlName="Nombre" />
+                        <mat-icon matSuffix>person_outline</mat-icon>
+                        <mat-error
+                            *ngIf="userForm.get('Nombre').hasError('required')"
+                        >
+                            El nombre completo es requerido
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="">
+                        <mat-label>Correo electronico</mat-label>
+                        <input matInput type="text" formControlName="Correo" />
+                        <mat-icon matSuffix>email</mat-icon>
+                        <mat-error
+                            *ngIf="userForm.get('Correo').hasError('required')"
+                        >
+                            El correo es requerido
+                        </mat-error>
+                        <mat-error
+                            *ngIf="userForm.get('Correo').hasError('email')"
+                        >
+                            Debe ingresar una dirección de correo válida
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="">
+                        <mat-label>Usuario</mat-label>
+                        <input
+                            matInput
+                            type="text"
+                            formControlName="UserName"
+                        />
+                        <mat-icon matSuffix>vpn_key</mat-icon>
+                        <mat-error
+                            *ngIf="
+                                userForm.get('UserName').hasError('required')
+                            "
+                        >
+                            El nombre del usuario es requerido
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Rol</mat-label>
+                        <mat-select formControlName="Idrole">
+                            <mat-option
+                                *ngFor="let role of roles"
+                                [value]="role.IdRole"
+                                >{{ role.Nombre }}</mat-option
+                            >
+                        </mat-select>
+
+                        <mat-error
+                            *ngIf="userForm.get('Idrole').hasError('required')"
+                        >
+                            El rol es requerido
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+                        <button
+                            mat-stroked-button
+                            color="primary"
+                            routerLink=".."
+                        >
+                            Cancelar
+                        </button>
+                        <button
+                            mat-raised-button
+                            color="primary"
+                            (click)="onSubmit(userForm.value)"
+                            [disabled]="userForm.invalid"
+                        >
+                            Guardar
+                        </button>
+                    </mat-card-actions>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

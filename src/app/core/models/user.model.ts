@@ -1,10 +1,10 @@
 export class IUser {
-    IDUsuario: number;
+    Idusuario: number;
     Nombre: string;
     Correo:string;
     Contrasenia: string;
     UserName: string;
-    IDRole: number;
+    Idrole: number;
     Estado: boolean;
 }
 
