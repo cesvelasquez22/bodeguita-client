@@ -1,14 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IProduct } from 'app/core/models/product.model';
 import { MainFacadeService } from 'app/core/services/main-facade/main-facade.service';
 import { IzitoastAlertService } from 'app/core/utils/izitoast-alert.service';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { IBrand } from '../../models/brand.model';
-import { ICategory } from '../../models/category.model';
-import { IDimension } from '../../models/dimension.model';
+import { IBrand } from 'app/core/models/brand.model';
+import { ICategory } from 'app/core/models/category.model';
+import { IDimension } from 'app/core/models/dimension.model';
 import { ProductService } from '../../services/product/product.service';
 
 @Component({

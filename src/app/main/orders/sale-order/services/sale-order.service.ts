@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { ISaleOrder } from "../models/sale-order";
-import { environment } from "environments/environment";
-import { headers } from "app/shared/constants/responseType";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ISaleOrder } from '../../../../core/models/sale-order';
+import { environment } from 'environments/environment';
+import { headers } from 'app/shared/constants/responseType';
 
 @Injectable()
 export class SaleOrderService {

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { ISaleOrder } from '../../models/sale-order';
+import { ISaleOrder } from 'app/core/models/sale-order';
 import { Subject } from 'rxjs';
 
 import { SaleOrderService } from '../../services/sale-order.service';

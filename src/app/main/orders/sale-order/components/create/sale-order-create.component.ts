@@ -6,7 +6,7 @@ import { IProduct } from 'app/core/models/product.model';
 import { ICustomer } from 'app/core/models/customer.model';
 import { IMeasureUnit } from 'app/core/models/measureUnit.model';
 import { MatTableDataSource } from '@angular/material/table';
-import { ISaleOrder, ISaleOrderDetail } from '../../models/sale-order';
+import { ISaleOrder, ISaleOrderDetail } from 'app/core/models/sale-order';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { switchMap, takeUntil } from 'rxjs/operators';

@@ -6,8 +6,8 @@ import { MainFacadeService } from 'app/core/services/main-facade/main-facade.ser
 import { MaxMinProductsService } from 'app/core/services/max-min-products/max-min-products.service';
 import { IzitoastAlertService } from 'app/core/utils/izitoast-alert.service';
 import { combineLatest, Observable } from 'rxjs';
-import { debounceTime, map, tap } from 'rxjs/operators';
-import { ISaleOrder } from '../orders/sale-order/models/sale-order';
+import { map } from 'rxjs/operators';
+import { ISaleOrder } from '../../core/models/sale-order';
 import { IWidgetData } from './models/widget.data';
 @Component({
     selector: 'app-home',

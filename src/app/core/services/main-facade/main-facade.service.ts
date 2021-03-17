@@ -6,10 +6,10 @@ import { IProduct } from 'app/core/models/product.model';
 import { IProvider } from 'app/core/models/provider.model';
 import { IRole } from 'app/core/models/role.model';
 import { IWarehousing } from 'app/core/models/warehousing.model';
-import { IBrand } from 'app/main/inventory/product/models/brand.model';
-import { ICategory } from 'app/main/inventory/product/models/category.model';
-import { IDimension } from 'app/main/inventory/product/models/dimension.model';
-import { ISaleOrder } from 'app/main/orders/sale-order/models/sale-order';
+import { IBrand } from 'app/core/models/brand.model';
+import { ICategory } from 'app/core/models/category.model';
+import { IDimension } from 'app/core/models/dimension.model';
+import { ISaleOrder } from 'app/core/models/sale-order';
 import { environment } from 'environments/environment';
 
 @Injectable({
