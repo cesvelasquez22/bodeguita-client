@@ -48,20 +48,20 @@ export const navigation: FuseNavigation[] = [
                 icon     : 'person_pin',
                 url      : 'admin-users',
             },
-            {
-                id       : 'customers',
-                title    : 'Clientes',
-                type     : 'item',
-                icon     : 'person',
-                url      : 'customers',
-            },
-            {
-                id       : 'providers',
-                title    : 'Proveedores',
-                type     : 'item',
-                icon     : 'contacts',
-                url      : 'providers',
-            },
+            // {
+            //     id       : 'customers',
+            //     title    : 'Clientes',
+            //     type     : 'item',
+            //     icon     : 'person',
+            //     url      : 'customers',
+            // },
+            // {
+            //     id       : 'providers',
+            //     title    : 'Proveedores',
+            //     type     : 'item',
+            //     icon     : 'contacts',
+            //     url      : 'providers',
+            // },
         ]
     },
     // {

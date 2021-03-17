@@ -1,1 +1,76 @@
-<p>role-list works!</p>
+<app-loading-overlay [isActive]="loading"></app-loading-overlay>
+<div class="page-layout simple fullwidth" fxLayout="column">
+    <app-title-header
+        [icon]="'assistant'"
+        [section]="'Roles de usuario'"
+        [title]="'Listado'"
+    ></app-title-header>
+    <div fxLayout="column" class="mx-12 mt-32">
+        <div fxLayout="row" fxLayoutAlign="end center">
+            <div
+                fxLayout="row"
+                fxLayoutAlign="end center"
+                class="mt-12 create-button"
+            >
+                <button mat-fab class="accent" (click)="roleDialog()">
+                    <mat-icon>playlist_add</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div fxLayout="column" class="mx-12">
+            <div fxFlex="100" class="mat-elevation-z8">
+                <table mat-table [dataSource]="dataSource" style="width: 100%">
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="Posicion">
+                        <th mat-header-cell *matHeaderCellDef>No.</th>
+                        <td mat-cell *matCellDef="let element; index as i">
+                            {{ i + 1 }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="Nombre">
+                        <th mat-header-cell *matHeaderCellDef>Rol</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.Nombre }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Description Column -->
+                    <ng-container matColumnDef="Descripcion">
+                        <th mat-header-cell *matHeaderCellDef>Descripción del rol</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.Descripcion }}
+                        </td>
+                    </ng-container>
+
+                    <!-- Actions column -->
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                        <td mat-cell *matCellDef="let element">
+                            <button
+                                mat-icon-button
+                                color="accent"
+                                (click)="roleDialog(element, true)"
+                            >
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr
+                        mat-row
+                        *matRowDef="let row; columns: displayedColumns"
+                    ></tr>
+                </table>
+                <mat-paginator
+                    fxLayoutAlign="end center"
+                    style="width: 100%"
+                    [pageSizeOptions]="[10, 20]"
+                    showFirstLastButtons
+                ></mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>

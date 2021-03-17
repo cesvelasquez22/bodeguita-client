@@ -12,10 +12,6 @@ const routes: Routes = [
         path: 'create',
         component: RoleCreateComponent
     },
-    {
-        path: ':id',
-        component: RoleCreateComponent
-    },
 ];
 
 @NgModule({

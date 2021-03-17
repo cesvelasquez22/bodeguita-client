@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,7 +15,7 @@ import { WarehousingCreateComponent } from '../create/warehousing-create.compone
     templateUrl: './warehousing-list.component.html',
     styleUrls: ['./warehousing-list.component.scss'],
 })
-export class WarehousingListComponent implements OnInit {
+export class WarehousingListComponent implements OnInit, OnDestroy {
     //
     // ─── PARAMS ─────────────────────────────────────────────────────────────────────
     //
@@ -31,7 +31,7 @@ export class WarehousingListComponent implements OnInit {
     constructor(
         private warehousingService: WarehousingService,
         private mainFacadeService: MainFacadeService,
-        private createProductInventoryialog: MatDialog,
+        private createProductInventoryDialog: MatDialog,
         private izitoastAlertService: IzitoastAlertService,
     ) {}
 
@@ -62,7 +62,7 @@ export class WarehousingListComponent implements OnInit {
     }
 
     productInventoryDialog(element?, editar?: boolean) {
-        this.createProductInventoryialog.open(WarehousingCreateComponent, {
+        this.createProductInventoryDialog.open(WarehousingCreateComponent, {
             data: {
                 editProductInventory: editar ? element : null,
             },

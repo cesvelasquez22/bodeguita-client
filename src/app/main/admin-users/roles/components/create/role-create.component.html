@@ -1,1 +1,28 @@
-<p>role-create works!</p>
+<form [formGroup]="roleForm" (ngSubmit)="onSubmit(roleForm)" class="role-dialog">
+    <h1 mat-dialog-title>{{ title }} rol</h1>
+    <mat-dialog-content>
+        <mat-form-field appearance="outline">
+            <mat-label>Rol</mat-label>
+            <input matInput formControlName="Nombre" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Descripción del rol</mat-label>
+            <textarea
+                matInput
+                formControlName="Descripcion"
+                maxlength="500"
+            ></textarea>
+            <mat-error *ngIf="roleForm.get('Descripcion').hasError('required')">
+                Completa este campo
+            </mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+        <button mat-stroked-button type="button" (click)="dialogRef.close()">
+            Cancelar
+        </button>
+        <button mat-raised-button type="submit" color="primary" [disabled]="roleForm.invalid">
+            Guardar
+        </button>
+    </mat-dialog-actions>
+</form>

@@ -3,7 +3,7 @@
     <mat-dialog-content>
         <mat-form-field appearance="outline">
             <mat-label>Producto</mat-label>
-            <mat-select formControlName="Idproducto" #providerSelect>
+            <mat-select formControlName="Idproducto">
                 <mat-option
                     *ngFor="let product of products"
                     [value]="product.IDProducto"

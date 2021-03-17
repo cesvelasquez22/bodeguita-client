@@ -4,7 +4,9 @@ import { IWarehousing } from 'app/core/models/warehousing.model';
 import { headers } from 'app/shared/constants/responseType';
 import { environment } from 'environments/environment';
 import { BehaviorSubject } from 'rxjs';
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class WarehousingService {
     private newProductInventory = new BehaviorSubject<IWarehousing>(null);
     public newProductInventory$ = this.newProductInventory.asObservable();
@@ -26,6 +28,7 @@ export class WarehousingService {
     }
 
     updateProductInventory(productInventory: IWarehousing) {
+        console.log(productInventory);
         return this.http.put(
             `${
                 environment.API_URL + environment.inventarioPrefix

@@ -43,8 +43,5 @@ import { DigitOnlyModule } from '@uiowa/digit-only';
         MatInputModule,
         MatSelectModule,
     ],
-    providers: [
-        WarehousingService
-    ],
 })
 export class WarehousingModule {}

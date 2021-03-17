@@ -6,6 +6,7 @@ export const environment = {
     production: false,
     hmr       : false,
     API_URL: 'https://localhost:44398/api/',
+    // API_URL: 'http://38.17.54.162:8083/api/',
 
     //
     // ─── URL CONTROLLERS PREFIX ─────────────────────────────────────────────────────

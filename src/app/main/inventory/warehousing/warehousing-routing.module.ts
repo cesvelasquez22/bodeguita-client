@@ -11,11 +11,7 @@ const routes: Routes = [
     {
         path: 'create',
         component: WarehousingCreateComponent,
-    },
-    {
-        path: ':id',
-        component: WarehousingCreateComponent,
-    },
+    }
 ];
 
 @NgModule({

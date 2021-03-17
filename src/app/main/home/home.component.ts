@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
             this.mainFacadeService.getSalesOrders(),
             this.mainFacadeService.getCustomers(),
             this.maxMinProductService.getMaxMinProducts().pipe(
-                map(maxMinProduct => maxMinProduct.filter((product: any) => product.cantidad === 0)),
+                map(maxMinProduct => maxMinProduct.filter((product: any) => product.cantidad <= 0)),
             )
         );
 
