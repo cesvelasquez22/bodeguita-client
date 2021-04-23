@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
         private izitoastAlertService: IzitoastAlertService
     ) {
         if (this.authService.currentTokenValue) {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/admin/home']);
           }
         // Configure the layout
         this.fuseConfigService.config = {
